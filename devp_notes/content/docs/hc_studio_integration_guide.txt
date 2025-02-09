@@ -1,0 +1,186 @@
+# HashCats Studio Integration Guide
+
+## Overview
+The HashCats Studio combines all AI tools into a cohesive interface, integrating with WordPress for content management.
+
+## Studio Structure
+```plaintext
+src/components/studio/
+├── Layout/               # Main studio layout
+├── Navigation/           # Tool navigation
+├── ArtGenerator/         # Cat art generation
+├── StyleTransfer/        # Style application
+└── common/              # Shared components
+```
+
+## Implementation Steps
+
+### 1. Studio Layout
+```jsx
+// src/components/studio/Layout/index.jsx
+import React from 'react';
+import Navigation from '../Navigation';
+import { useStudioContext } from '../../contexts/StudioContext';
+
+const StudioLayout = ({ children }) => {
+  const { activeTool } = useStudioContext();
+
+  return (
+    <div className="flex h-screen bg-gray-900">
+      <Navigation />
+      <main className="flex-1 overflow-auto">
+        <div className="container mx-auto px-4 py-8">
+          {children}
+        </div>
+      </main>
+    </div>
+  );
+};
+
+export default StudioLayout;
+```
+
+### 2. Tool Navigation
+```jsx
+// src/components/studio/Navigation/index.jsx
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { STUDIO_TOOLS } from '../../../constants/studioTools';
+
+const Navigation = () => {
+  const location = useLocation();
+
+  return (
+    <nav className="w-64 bg-gray-800 p-4">
+      <h2 className="text-xl text-white mb-4">HashCats Studio</h2>
+      <ul className="space-y-2">
+        {STUDIO_TOOLS.map(tool => (
+          <li key={tool.id}>
+            <Link
+              to={tool.path}
+              className={`block p-2 rounded ${
+                location.pathname === tool.path
+                  ? 'bg-purple-600'
+                  : 'hover:bg-gray-700'
+              } text-white`}
+            >
+              {tool.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+};
+```
+
+### 3. WordPress Integration
+```php
+// functions.php or custom plugin
+function hashcats_studio_init() {
+  // Register studio page template
+  add_filter('theme_page_templates', function($templates) {
+    $templates['studio-template.php'] = 'HashCats Studio';
+    return $templates;
+  });
+
+  // Add REST API endpoints
+  add_action('rest_api_init', function() {
+    register_rest_route('hashcats/v1', '/studio/config', array(
+      'methods' => 'GET',
+      'callback' => 'get_studio_config'
+    ));
+  });
+}
+add_action('init', 'hashcats_studio_init');
+```
+
+## Context Management
+```jsx
+// src/contexts/StudioContext.jsx
+import React, { createContext, useContext, useState } from 'react';
+
+const StudioContext = createContext(null);
+
+export const StudioProvider = ({ children }) => {
+  const [activeTool, setActiveTool] = useState(null);
+  const [settings, setSettings] = useState({});
+
+  return (
+    <StudioContext.Provider value={{
+      activeTool,
+      setActiveTool,
+      settings,
+      setSettings
+    }}>
+      {children}
+    </StudioContext.Provider>
+  );
+};
+
+export const useStudioContext = () => useContext(StudioContext);
+```
+
+## Routing Configuration
+```jsx
+// src/App.js
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import StudioLayout from './components/studio/Layout';
+import { StudioProvider } from './contexts/StudioContext';
+
+const App = () => {
+  return (
+    <BrowserRouter>
+      <StudioProvider>
+        <Routes>
+          <Route path="/studio" element={<StudioLayout />}>
+            <Route path="create" element={<ArtGenerator />} />
+            <Route path="style" element={<StyleTransfer />} />
+            {/* Add more routes */}
+          </Route>
+        </Routes>
+      </StudioProvider>
+    </BrowserRouter>
+  );
+};
+```
+
+## WordPress Templates
+```php
+// studio-template.php
+<?php
+/*
+Template Name: HashCats Studio
+*/
+
+get_header();
+?>
+
+<div id="hashcats-studio-root"></div>
+
+<?php
+wp_enqueue_script('hashcats-studio');
+get_footer();
+?>
+```
+
+## Data Flow
+1. WordPress -> React:
+   - Configuration
+   - User data
+   - Saved artwork
+
+2. React -> WordPress:
+   - Generated art
+   - User preferences
+   - Gallery updates
+
+## Security Considerations
+1. API Authentication
+2. User permissions
+3. Content validation
+
+## Performance Optimization
+1. Code splitting
+2. Lazy loading
+3. Asset optimization

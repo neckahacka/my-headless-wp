@@ -1,0 +1,21 @@
+.post-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    background-color: #f9f9f9;
+}
+
+.post-card h2 {
+    margin-bottom: 8px;
+    font-size: 20px;
+}
+
+.post-card .read-more {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.post-card .read-more:hover {
+    text-decoration: underline;
+}

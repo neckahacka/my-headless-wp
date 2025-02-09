@@ -1,0 +1,108 @@
+from docx import Document
+
+# Create a new Word document
+doc = Document()
+
+# Add title
+doc.add_heading('Detailed Summary: XAMPP Configuration and Setup', level=1)
+
+# Add sections and content
+doc.add_heading('Objective', level=2)
+doc.add_paragraph(
+    "The goal was to configure XAMPP to correctly run Apache on both HTTP (http://localhost) "
+    "and HTTPS (https://localhost), resolving any issues with SSL and ensuring the system was fully functional."
+)
+
+doc.add_heading('Steps Performed', level=2)
+
+# Step 1: Initial Issues
+doc.add_heading('Step 1: Identified Issues in XAMPP Control Panel', level=3)
+doc.add_paragraph(
+    "1. Opened the XAMPP Control Panel, which showed:\n"
+    "   - Apache was running on ports 80 (HTTP) and 443 (HTTPS).\n"
+    "   - The logs showed Apache was successfully started but there was an issue accessing HTTPS due to the default configuration.\n\n"
+    "Control Panel Logs Before Restart:\n"
+    "[main] Initializing Control Panel\n"
+    "[main] Running with Administrator rights - good!\n"
+    "[Apache] XAMPP Apache is already running on port 80\n"
+    "[Apache] XAMPP Apache is already running on port 443"
+)
+
+# Step 2: Configured SSL
+doc.add_heading('Step 2: Configured SSL', level=3)
+doc.add_paragraph(
+    "1. Generated SSL Certificate:\n"
+    "   - Used OpenSSL from the Apache bin directory to generate a self-signed SSL certificate:\n"
+    "     D:\\xampp\\apache\\bin\\openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout server.key -out server.crt -config D:\\xampp\\apache\\conf\\openssl.cnf\n"
+    "   - Provided placeholder information during the certificate generation process.\n\n"
+    "2. Placed Certificates:\n"
+    "   - The generated server.key and server.crt files were placed in the directory:\n"
+    "     D:\\xampp\\apache\\conf\n\n"
+    "3. Edited Apache Configuration:\n"
+    "   - Opened httpd-ssl.conf located in D:\\xampp\\apache\\conf\\extra.\n"
+    "   - Updated the SSL certificate paths:\n"
+    "     SSLCertificateFile \"D:/xampp/apache/conf/server.crt\"\n"
+    "     SSLCertificateKeyFile \"D:/xampp/apache/conf/server.key\"\n"
+    "   - Verified that SSLEngine on was enabled and that the server was listening on port 443."
+)
+
+# Step 3: Restarted Apache
+doc.add_heading('Step 3: Restarted Apache', level=3)
+doc.add_paragraph(
+    "1. Stopped and restarted Apache from the XAMPP Control Panel.\n"
+    "2. Verified that Apache was running on both HTTP and HTTPS without errors.\n\n"
+    "Control Panel Logs After Restart:\n"
+    "[Apache] Attempting to stop Apache (PID: 15648)\n"
+    "[Apache] Attempting to stop Apache (PID: 16664)\n"
+    "[Apache] Status change detected: stopped\n"
+    "[Apache] Attempting to start Apache app...\n"
+    "[Apache] Status change detected: running"
+)
+
+# Step 4: Tested HTTP and HTTPS
+doc.add_heading('Step 4: Tested HTTP and HTTPS', level=3)
+doc.add_paragraph(
+    "1. HTTP (http://localhost):\n"
+    "   - Opened the browser and accessed http://localhost, which successfully loaded the XAMPP dashboard.\n\n"
+    "2. HTTPS (https://localhost):\n"
+    "   - Opened the browser and accessed https://localhost, which displayed a browser warning:\n"
+    "     NET::ERR_CERT_AUTHORITY_INVALID\n"
+    "   - Clicked Advanced > Proceed to localhost (unsafe), and the XAMPP dashboard loaded successfully."
+)
+
+# Step 5: Verified Ports and Processes
+doc.add_heading('Step 5: Verified Ports and Processes', level=3)
+doc.add_paragraph(
+    "1. Verified that Apache was listening on ports 80 and 443 using netstat:\n"
+    "   netstat -ano | findstr :443\n\n"
+    "   Output:\n"
+    "   TCP    0.0.0.0:443            0.0.0.0:0              LISTENING       2204\n"
+    "   TCP    [::]:443               [::]:0                 LISTENING       2204\n\n"
+    "2. Confirmed the Apache executable path using:\n"
+    "   wmic process where \"ProcessId=2204\" get ExecutablePath\n\n"
+    "   Output:\n"
+    "   ExecutablePath: D:\\xampp\\apache\\bin\\httpd.exe"
+)
+
+# Current Status
+doc.add_heading('Current Status', level=2)
+doc.add_paragraph(
+    "- HTTP (http://localhost): Successfully serving the XAMPP dashboard.\n"
+    "- HTTPS (https://localhost): Successfully serving the XAMPP dashboard after bypassing the browser warning.\n"
+    "- XAMPP Control Panel:\n"
+    "  - Apache is running with:\n"
+    "    - Ports: 80 (HTTP) and 443 (HTTPS).\n"
+    "    - PIDs: 2204 and 15660.\n\n"
+    "Final Control Panel Logs:\n"
+    "[Apache] XAMPP Apache is already running on port 80\n"
+    "[Apache] XAMPP Apache is already running on port 443\n"
+    "[Apache] Attempting to stop Apache app...\n"
+    "[Apache] Attempting to start Apache app...\n"
+    "[Apache] Status change detected: running"
+)
+
+# Save the document
+output_path = '/mnt/data/XAMPP_Configuration_Summary.docx'
+doc.save(output_path)
+
+output_path

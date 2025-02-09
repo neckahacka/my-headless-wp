@@ -1,0 +1,111 @@
+HashCats Project Documentation
+
+# HashCats Project Documentation
+
+## Project Overview
+HashCats is a hybrid React/WordPress platform that integrates AI tools (DALL·E, ChatGPT, FLUX) with planned blockchain functionality for future NFT features. The platform uses React for front-end interactivity while maintaining WordPress compatibility.
+
+## Development Environment
+
+### Current Setup
+- Location: D:\xampp\htdocs\my-headless-wp\
+- Node.js: v18.19.0
+- npm: 10.2.3
+- WordPress: Local installation via XAMPP
+
+### Project Structure
+```plaintext
+my-headless-wp/
+├── frontend/               # React application
+│   └── src/
+│       ├── components/    
+│       │   ├── buttons/
+│       │   ├── galleries/
+│       │   └── studio/
+│       │       ├── common/
+│       │       ├── creative/
+│       │       └── utils/
+│       ├── pages/
+│       │   └── studio/
+│       └── services/
+└── wordpress/             # WordPress installation
+```
+
+## Component Structure
+
+### Core Components
+1. Studio Components
+   - StudioLayout.jsx - Main layout wrapper
+   - ToolSelector.jsx - Tool selection interface
+   - FeatureMenu.jsx - Feature navigation menu
+
+2. Creative Tools
+   - CatCreator.jsx - Main cat art generation
+   - CatPersonality.jsx - Cat personality generator
+   - CatStyleTransfer.jsx - Style application tool
+
+3. Utility Components
+   - ImageEnhancer.jsx - Resolution enhancement
+   - BackgroundRemover.jsx - Background removal tool
+   - FaceSwapper.jsx - Face swap functionality
+
+## Integration Points
+
+### WordPress Integration
+1. WordPress Pages
+   - HashCats Studio page with shortcode integration
+   - Gallery system using WordPress backend
+   - REST API endpoints for React communication
+
+2. React Components
+   - WordPress API service for content fetching
+   - Media handling integration
+   - User authentication flow
+
+### AI Tool Integration
+1. Current Tools
+   - DALL·E for image generation
+   - ChatGPT for text generation
+   - FLUX for image manipulation
+
+2. Planned Features
+   - Style mixing capabilities
+   - Enhanced resolution tools
+   - Background manipulation
+
+## Development Progress
+
+### Completed
+- Basic WordPress setup
+- React project initialization
+- File structure organization
+- Basic routing implementation
+
+### In Progress
+- Studio component development
+- WordPress-React integration
+- AI tool implementation
+
+### Next Steps
+1. Complete HashCats Studio interface
+2. Implement gallery system
+3. Set up user authentication
+4. Add AI tool integration
+
+## Technical Notes
+
+### WordPress Configuration
+- Custom post types for galleries
+- REST API customization
+- Required plugins setup
+
+### React Setup
+- Tailwind CSS for styling
+- React Router for navigation
+- API service organization
+
+## Documentation Updates
+Last Updated: January 18, 2025
+Version: 1.0
+
+This documentation will be updated as development progresses.
