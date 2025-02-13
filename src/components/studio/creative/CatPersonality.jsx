@@ -1,126 +1,90 @@
 import React, { useState } from "react";
-import { Crown, Sparkles, Edit } from "lucide-react";
+import { generateBackstory } from "../../../services/aiPowerService";
+import { Crown } from "lucide-react"; // ✅ Ensure this import exists
 
-const predefinedTraits = [
-  "Playful",
-  "Mysterious",
-  "Elegant",
-  "Curious",
-  "Grumpy",
-  "Adventurous",
-  "Lazy",
-  "Affectionate",
-];
+const themes = ["Adventure", "Comedy", "Mystery", "Fantasy"];
 
 const CatPersonality = () => {
-  const [personality, setPersonality] = useState({ traits: [], backstory: "" });
+  const [traits, setTraits] = useState([]);
+  const [theme, setTheme] = useState("Adventure");
+  const [backstory, setBackstory] = useState("");
   const [loading, setLoading] = useState(false);
-  const [editing, setEditing] = useState(false);
-  const [customTraits, setCustomTraits] = useState([]);
+  const [error, setError] = useState(null);
 
-  const generateTraits = () => {
-    const numTraits = Math.floor(Math.random() * 3) + 2; // 2-4 traits
-    const selectedTraits = new Set();
-    while (selectedTraits.size < numTraits) {
-      const randomTrait = predefinedTraits[Math.floor(Math.random() * predefinedTraits.length)];
-      selectedTraits.add(randomTrait);
+  const handleGenerate = async () => {
+    if (traits.length === 0) {
+      setError("Please select at least one personality trait.");
+      return;
     }
-    setPersonality((prev) => ({ ...prev, traits: Array.from(selectedTraits) }));
-  };
 
-  const generateBackstory = async () => {
     setLoading(true);
-    console.log("🟢 Sending API Request...");
+    setError(null);
 
     try {
-      const response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model: "gpt-4",
-          messages: [{ role: "system", content: `Create a short, fun backstory for a cat with traits: ${personality.traits.join(", ")}.` }],
-          max_tokens: 50,
-        }),
-      });
-
-      console.log("🟢 API Request Sent. Awaiting response...");
-      
-      // ✅ Log full response before parsing
-      const data = await response.json();
-      console.log("🔍 API Response:", data);
-
-      // ✅ Check if response contains choices
-      if (!data.choices || !Array.isArray(data.choices) || data.choices.length === 0) {
-        console.error("❌ API Response Missing `choices`:", data);
-        alert("Error: OpenAI API did not return a valid response. Check API key and request.");
-        return;
-      }
-
-      // ✅ Set backstory only if data.choices exists
-      setPersonality((prev) => ({
-        ...prev,
-        backstory: data.choices[0].message.content.trim(),
-      }));
-    } catch (error) {
-      console.error("❌ API Request Failed:", error);
-      alert("Error generating backstory. Check API settings.");
+      const story = await generateBackstory(traits, theme);
+      setBackstory(story);
+    } catch (err) {
+      setError("Failed to generate backstory. Try again.");
+      console.error(err);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="bg-gray-800 rounded-lg p-6">
+    <div className="bg-gray-900 p-8 rounded-xl shadow-lg border border-gray-700/50">
       <div className="flex items-center gap-3 mb-6">
-        <Crown className="w-6 h-6 text-purple-400" />
-        <h2 className="text-2xl font-bold text-white">Cat Personality Generator</h2>
+        <div className="p-3 bg-purple-500/10 rounded-lg">
+          <Crown className="w-6 h-6 text-yellow-400" />
+        </div>
+        <h2 className="text-3xl font-bold text-white">Cat Personality Generator</h2>
       </div>
 
-      <button onClick={generateTraits} className="w-full py-3 rounded-lg bg-purple-600 text-white mb-3">
-        Generate Traits
+      {/* Theme Selector */}
+      <div className="mb-4">
+        <label className="text-white block mb-2">Select a Story Theme</label>
+        <select
+          className="w-full p-2 rounded bg-gray-800 text-white"
+          value={theme}
+          onChange={(e) => setTheme(e.target.value)}
+        >
+          {themes.map((t) => (
+            <option key={t} value={t}>{t}</option>
+          ))}
+        </select>
+      </div>
+
+      {/* Trait Selection Placeholder (Adjust Based on Your UI) */}
+      <div className="mb-4">
+        <label className="text-white block mb-2">Personality Traits</label>
+        <input
+          type="text"
+          className="w-full p-2 rounded bg-gray-800 text-white"
+          placeholder="E.g., Playful, Mysterious, Brave"
+          onChange={(e) => setTraits(e.target.value.split(","))}
+        />
+      </div>
+
+      {/* Generate Button */}
+      <button
+        onClick={handleGenerate}
+        disabled={loading}
+        className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 
+                   text-white py-4 px-6 rounded-lg font-medium shadow-lg 
+                   disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 ease-out"
+      >
+        {loading ? "Generating Story..." : "Generate Backstory"}
       </button>
-      {personality.traits.length > 0 && (
-        <div className="bg-gray-700 rounded-lg p-4">
-          <h3 className="text-purple-400 font-semibold mb-2">Traits</h3>
-          <div className="flex gap-2 flex-wrap">
-            {personality.traits.map((trait, index) => (
-              <span key={index} className="px-3 py-1 bg-gray-600 rounded-full text-white text-sm">
-                {trait}
-              </span>
-            ))}
-          </div>
+
+      {/* Display Backstory */}
+      {backstory && (
+        <div className="bg-gray-800/30 backdrop-blur-xl p-6 rounded-lg border border-gray-700/50 shadow-md">
+          <h3 className="text-purple-400 font-semibold">Generated Story</h3>
+          <p className="text-gray-300 mt-2">{backstory}</p>
         </div>
       )}
 
-      <button
-        onClick={generateBackstory}
-        disabled={loading || personality.traits.length === 0}
-        className="w-full py-3 rounded-lg bg-pink-600 text-white mt-3"
-      >
-        {loading ? "Generating Backstory..." : "Generate Backstory"}
-      </button>
-      {personality.backstory && (
-        <div className="bg-gray-700 rounded-lg p-4 mt-3">
-          <div className="flex justify-between items-center">
-            <h3 className="text-purple-400 font-semibold">Backstory</h3>
-            <button onClick={() => setEditing(!editing)} className="text-white">
-              <Edit className="w-5 h-5" />
-            </button>
-          </div>
-          {editing ? (
-            <textarea
-              className="w-full bg-gray-600 text-white rounded p-2 mt-2"
-              value={personality.backstory}
-              onChange={(e) => setPersonality({ ...personality, backstory: e.target.value })}
-            />
-          ) : (
-            <p className="text-gray-300 mt-2">{personality.backstory}</p>
-          )}
-        </div>
-      )}
+      {error && <p className="text-red-500 mt-3">{error}</p>}
     </div>
   );
 };
