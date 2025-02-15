@@ -1,6 +1,7 @@
-﻿import React, { useState } from "react";
-import { Sparkles, Palette, Loader, Cat, Download, Share2, Heart } from "lucide-react";
+import React, { useState } from "react";
+import { Sparkles, Loader, Cat } from "lucide-react";
 import { generateCatArt } from "../../../services/aiPowerService"; // ✅ Corrected import path
+import { NavLink } from "react-router-dom";
 
 // PromptBuilder Component
 const PromptBuilder = ({ value, onChange, disabled }) => {
@@ -176,4 +177,29 @@ const ArtGenerator = () => {
   );
 };
 
+export const STUDIO_TOOLS = [
+  { name: 'Cat Personality Generator', path: '/studio/personality' },
+  { name: 'Art Generator', path: '/studio/create' },  // ArtGenerator added
+  { name: 'Style Transfer', path: '/studio/transform' },
+];
+
 export default ArtGenerator;
+
+// Navigation Component
+const Navigation = () => {
+  return (
+    <nav className="space-x-4">
+      {STUDIO_TOOLS.map((tool) => (
+        <NavLink
+          key={tool.path}
+          to={tool.path}
+          className="text-white hover:text-purple-400"
+        >
+          {tool.name}
+        </NavLink>
+      ))}
+    </nav>
+  );
+};
+
+export { Navigation };
