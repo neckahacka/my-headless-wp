@@ -53,3 +53,9 @@ yarn-error.log*
 # Same logic for plugins if needed:
 # /wordpress/wp-content/plugins/*
 # !/wordpress/wp-content/plugins/my-custom-plugin
+
+# ------------------------------------------------------------------
+# 4) FRONTEND EXCLUSIONS
+# ------------------------------------------------------------------
+/frontend/node_modules
+/frontend/.env

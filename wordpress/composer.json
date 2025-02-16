@@ -1,0 +1,31 @@
+{
+  "name": "hashcats/wordpress",
+  "description": "HashCats platform with WordPress integration",
+  "type": "project",
+  "require": {
+    "php": "^8.1",
+    "composer/installers": "^2.1",
+    "johnpbloch/wordpress": "^5.8",
+    "vlucas/phpdotenv": "^5.4",
+    "symfony/var-dumper": "^5.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "HashCats\\": "src/"
+    }
+  },
+  "scripts": {
+    "post-create-project-cmd": [
+      "composer dump-autoload"
+    ]
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true,
+      "johnpbloch/wordpress-core-installer": true
+    }
+  }
+}

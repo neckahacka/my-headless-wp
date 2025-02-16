@@ -1,0 +1,38 @@
+{
+	"variables": [],
+	"info": {
+		"name": "JWT_AUTHENITCATION_TOKEN_REQUEST",
+		"_postman_id": "42ddcda3-2ae0-ff25-02d4-ee57acabf31e",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "JWT_AUTHENTICATION_TOKEN_REQUEST",
+			"request": {
+				"url": "http://<wp_base_url>/wp-json/api/v1/token ",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "<wordpress_username>",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "<wordpress_password>",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,1207 @@
+body {
+  background: #f3f0e7;
+}
+.aipower-dashboard-container {
+  max-width: 100%; /* Ensure container takes up full width without overflow */
+  margin: 0 auto;
+  padding: 10px;
+}
+
+/* Top Navigation */
+.aipower-top-navigation ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.aipower-top-navigation li {
+  margin-right: 15px;
+}
+
+.aipower-nav-link {
+  display: flex;
+  align-items: center;
+  color: #555;
+  text-decoration: none;
+  background-color: #ffffff;
+  border-radius: 8px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex: 1 1 auto;
+  padding: 10px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  flex-grow: 1;
+}
+
+.aipower-nav-link:hover {
+  background-color: #e0e0e0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.aipower-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  fill: #0073e6;
+}
+
+.aipower-nav-link.active {
+  background-color: #0073e6;
+  color: #ffffff;
+}
+
+.aipower-nav-link.active .aipower-icon {
+  fill: #ffffff;
+}
+
+/* Header */
+.aipower-header {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between the title and spinner/message */
+}
+
+.aipower-title {
+  color: #333;
+}
+
+.aipower-status-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between the spinner and the message */
+}
+
+/* Spinner */
+.aipower-spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #000000;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  animation: aipower-spin 1s linear infinite;
+}
+/* Autosaving Message */
+.aipower-autosaving {
+  display: inline-block; /* Keep the message inline with the spinner */
+  color: #555;
+  font-style: italic;
+}
+
+@keyframes aipower-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Messages */
+.aipower-message.success {
+  color: green;
+}
+
+.aipower-message.error {
+  color: red;
+}
+
+/* Tabs */
+.aipower-tabs {
+  display: flex;
+  justify-content: flex-start; /* Align tabs to the left on desktop */
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  max-width: fit-content; /* Make the tab container compact on desktop */
+}
+
+.aipower-tab-btn {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  font-size: 14px;
+  color: #555;
+  transition: background-color 0.3s;
+  border-radius: 4px 4px 0 0;
+  text-align: center;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  width: auto; /* Compact on desktop */
+  max-width: none;
+}
+
+.aipower-tab-btn.active {
+  background-color: #f0f8ff;
+  color: #0073e6;
+  border-bottom: none;
+}
+
+.aipower-tab-btn:hover {
+  background-color: #f9f9f9;
+}
+
+/* Tab Content */
+.aipower-tab-content {
+  background-color: #ffffff;
+  padding: 10px 10px;
+  border: 1px solid #ddd;
+  border-top: none;
+  border-radius: 0 8px 8px 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Ensure content takes full width */
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.aipower-tab-pane {
+  display: none;
+}
+
+.aipower-tab-pane.active {
+  display: block;
+}
+
+/* Align form elements */
+.aipower-form-group {
+  margin-bottom: 5px;
+}
+
+.aipower-form-group label {
+  font-weight: bold; /* Make the text bold */
+  margin-bottom: 5px; /* Add some space below the label */
+  display: block; /* Ensure labels are on their own line */
+  transition: color 0.3s ease; /* Add a transition for hover effect */
+}
+
+/* For text inputs */
+.aipower-form-group input[type="text"],
+.aipower-form-group input[type="number"],
+.aipower-form-group textarea {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+  width: 100%; /* Full width for mobile */
+  box-sizing: border-box; /* Ensure padding and borders don't affect width */
+  margin-bottom: 5px; /* Add space below the input */
+}
+
+/* For select dropdowns */
+.aipower-form-group select {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+  width: 100%; /* Full width for mobile */
+  box-sizing: border-box; /* Ensure padding and borders don't affect width */
+  margin-bottom: 5px; /* Add space below the select */
+}
+
+.aipower-form-group input[type="text"],
+.aipower-form-group input[type="number"],
+.aipower-form-group select {
+  width: 100%; /* Make fields full width */
+  box-sizing: border-box; /* Include padding and border in width calculation */
+}
+
+.aipower-form-group input[type="text"]:focus,
+.aipower-form-group input[type="number"]:focus,
+.aipower-form-group select:focus,
+.aipower-form-group textarea:focus {
+  border-color: #0073e6;
+  background-color: #ffffff;
+}
+
+/* For radio buttons */
+.aipower-form-group input[type="radio"] {
+  margin-right: 10px; /* Space between the radio button and label */
+  vertical-align: middle; /* Aligns the radio button with text */
+  accent-color: #0073e6; /* Custom radio button color */
+}
+
+@keyframes aipower-rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.aipower-rotating {
+  animation: aipower-rotation 2s infinite linear;
+}
+
+/* Remove default appearance and set base styles */
+.aipower-form-group input[type="range"] {
+  appearance: none;
+  margin: 5px 0;
+  background-color: transparent; /* Hide the default track */
+}
+
+/* Style the track */
+.aipower-form-group input[type="range"]::-webkit-slider-runnable-track {
+  height: 8px;
+  background: #ddd; /* Track color */
+  border-radius: 5px;
+}
+
+.aipower-form-group input[type="range"]::-moz-range-track {
+  height: 8px;
+  background: #ddd; /* Track color */
+  border-radius: 5px;
+}
+
+/* Style the thumb (handle) */
+.aipower-form-group input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default thumb */
+  width: 20px;
+  height: 20px;
+  background: #0073e6; /* Thumb color */
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -6px; /* Align the thumb with the track */
+}
+
+.aipower-form-group input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #0073e6; /* Thumb color */
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Hover effects (optional) */
+.aipower-form-group input[type="range"]:hover::-webkit-slider-thumb {
+  background: #005bb5;
+}
+
+.aipower-form-group input[type="range"]:hover::-moz-range-thumb {
+  background: #005bb5;
+}
+
+/* Active state (when clicking on the thumb) */
+.aipower-form-group input[type="range"]:active::-webkit-slider-thumb {
+  background: #004999;
+}
+
+.aipower-form-group input[type="range"]:active::-moz-range-thumb {
+  background: #004999;
+}
+
+/* Focus outline removal */
+.aipower-form-group input[type="range"]:focus {
+  outline: none;
+}
+/* Container Styles */
+.aipower-settings-buttons {
+  max-width: 250px; /* Slightly increased from 250px */
+}
+
+/* Button Styles */
+.aipower-settings-buttons .aipower-settings-btn {
+  flex: 1;
+  margin: 0 5px;
+  text-align: center;
+  padding: 7px; /* Reduced padding */
+  background-color: #2271b1;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+  white-space: nowrap; /* Prevent text from wrapping */
+  box-sizing: border-box; /* Ensure padding is included in width calculation */
+}
+
+/* Remove extra margins for first and last buttons */
+.aipower-settings-buttons .aipower-settings-btn:first-child {
+  margin-left: 0;
+}
+
+.aipower-settings-buttons .aipower-settings-btn:last-child {
+  margin-right: 0;
+}
+
+/* Hover and Active States */
+.aipower-settings-btn:hover,
+.aipower-settings-btn.active {
+  background-color: #006799;
+}
+
+/* When only one button is present */
+.aipower-settings-buttons .aipower-settings-btn:only-child {
+  margin: 0;
+}
+
+/* Sub-Tabs Navigation */
+.aipower-sub-tabs {
+  font-size: 14px;
+}
+
+.aipower-sub-tabs a {
+  color: #0073e6;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+  display: inline-block;
+}
+
+.aipower-sub-tabs a:hover {
+  text-decoration: underline;
+}
+
+.aipower-sub-tabs a.active {
+  color: #333;
+  font-weight: bold;
+  pointer-events: none;
+  cursor: default;
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+.aipower-sub-tabs a:focus,
+.aipower-sub-tabs a:active,
+.aipower-sub-tabs a:focus-visible {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+/* Style the separator */
+.aipower-sub-tabs .separator {
+  color: #000;
+  display: inline;
+}
+
+/* Remove the separator pseudo-element */
+.aipower-sub-tabs a:not(:first-child):before {
+  content: none;
+}
+
+/* Sub-Tab Content */
+.aipower-sub-tab-pane {
+  display: none; /* Hide all sub-tab panes by default */
+}
+
+.aipower-sub-tab-pane.active {
+  display: block; /* Show only the active sub-tab pane */
+}
+
+.aipower-sub-tab-content {
+  margin-top: 10px;
+}
+
+.aipower-heading-settings {
+  display: flex;
+  gap: 10px;
+}
+
+#aipower-extra-settings .aipower-form-group,
+#aipower-seo-settings .aipower-form-group,
+#aipower-image-settings .aipower-form-group,
+#aipower-woocommerce-settings .aipower-form-group,
+#aipower-additional-settings .aipower-form-group,
+#aipower-common-settings .aipower-form-group,
+#aipower-image-extra-settings .aipower-form-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#aipower-extra-settings input[type="checkbox"],
+#aipower-seo-settings input[type="checkbox"],
+#aipower-image-settings input[type="checkbox"],
+#aipower-woocommerce-settings input[type="checkbox"],
+#aipower-additional-settings input[type="checkbox"],
+#aipower-common-settings input[type="checkbox"],
+#aipower-image-extra-settings input[type="checkbox"] {
+  margin: 0; /* Remove default margins */
+  vertical-align: middle; /* Ensures checkbox aligns vertically with text */
+}
+
+#aipower-extra-settings label,
+#aipower-seo-settings label,
+#aipower-image-settings label,
+#aipower-woocommerce-settings label,
+#aipower-additional-settings label,
+#aipower-common-settings label,
+#aipower-image-extra-settings label {
+  margin: 0; /* Ensure label is aligned */
+  vertical-align: middle;
+  font-weight: normal; /* Reset font weight */
+}
+
+#aipower-extra-settings a,
+#aipower-seo-settings a,
+#aipower-image-settings a,
+#aipower-woocommerce-settings a,
+#aipower-additional-settings a,
+#aipower-common-settings a,
+#aipower-image-extra-settings a {
+  vertical-align: middle;
+}
+
+/* Align child elements next to their parent */
+.aipower-form-subgroup {
+  display: flex;
+  align-items: center;
+  margin-left: 0; /* Remove left margin */
+  padding-left: 0; /* Remove padding */
+  border-left: none; /* Remove the border */
+  max-height: 16px; /* Limit height to prevent overflow */
+}
+
+/* Adjust label and input widths for better alignment */
+.aipower-form-subgroup label {
+  width: auto; /* Ensure labels are compact */
+  margin-bottom: 0; /* Remove margin below the label */
+}
+
+.aipower-form-subgroup input[type="text"],
+.aipower-form-subgroup select {
+  width: 150px; /* Adjust input and select field widths */
+  margin-bottom: 0; /* Remove margin below the input */
+}
+
+/* Container Styling */
+.aipower-category-container {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Heading Styling */
+.aipower-category-container h3 {
+  display: inline-block; /* Make the heading fit the content width */
+  margin-top: 0; /* Remove default top margin */
+  font-size: 13px; /* Adjust font size as needed */
+  border-bottom: 2px solid #0073e6; /* Underline only the text */
+  padding-bottom: 5px; /* Space between text and border */
+  width: fit-content; /* Adjust width to fit the content */
+}
+
+.aipower-image-settings {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Six columns for desktop */
+  gap: 10px; /* Spacing between elements */
+}
+.aipower-replicate-settings {
+  display: block; /* Change to block to stack elements vertically */
+  gap: 15px; /* Add spacing between elements */
+}
+
+/* make text fields and dropdown widht 250px under the aipower-replicate-settings */
+.aipower-replicate-settings input[type="text"],
+.aipower-replicate-settings select {
+  width: 250px;
+}
+
+/* Adjust size and position for 'Get API Key' link next to the label */
+.aipower-get-api-link {
+  font-size: 11px; /* Make the text smaller */
+  text-decoration: none; /* Remove underline */
+  /* remove bold font weight */
+  font-weight: normal;
+}
+
+.aipower-get-api-link:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
+
+/* Ensure the API Key field is full width */
+.aipower-api-key-group input {
+  width: 100%;
+  box-sizing: border-box; /* Make sure padding and border don't affect the width */
+}
+
+/* Align Model Dropdown with Sync Button */
+.aipower-model-group .aipower-model-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Adds space between the dropdown and the sync icon */
+}
+/* Settings Icon */
+.aipower-settings-icon,
+.aipower-bot-settings-icon,
+.aipower-info-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  vertical-align: middle;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s;
+  display: inline-flex;
+}
+
+.aipower-settings-icon:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.aipower-info-icon {
+  text-decoration: none;
+  outline: none;
+  margin-top: -10px;
+}
+
+.aipower-info-icon:focus {
+  outline: none;
+  box-shadow: none; /* This removes any focus border or shadow */
+}
+
+/* Compact Table Styling */
+.aipower-image-settings-table {
+  border-collapse: collapse; /* Remove gaps between table cells */
+  margin-bottom: 10px; /* Add some space below the table */
+}
+
+.aipower-image-settings-table th,
+.aipower-image-settings-table td {
+  padding: 4px 6px; /* Reduce padding to make it more compact */
+  text-align: left; /* Align text to the left for better readability */
+  border-bottom: 1px solid #ddd; /* Add a subtle border between rows */
+}
+
+.aipower-image-settings-table th {
+  background-color: #f5f5f5; /* Light background for header */
+  font-weight: bold; /* Emphasize header text */
+}
+
+.aipower-image-settings-table td {
+  vertical-align: middle; /* Ensure content aligns vertically in the middle */
+}
+
+.aipower-image-settings-table input[type="radio"] {
+  margin: 0; /* Remove default margins for radio buttons */
+  vertical-align: middle; /* Align radio buttons with text */
+}
+
+/* Parent container for all three settings */
+.aipower-content-wrapper {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  gap: 10px; /* Space between the containers */
+}
+
+/* Adjust the width of all three containers */
+.content-settings-container,
+.seo-settings-container,
+.image-settings-container,
+.woocommerce-settings-container,
+.additional-settings-container,
+.common-settings-container,
+.search-settings-container {
+  flex: 1; /* Equal width for all containers */
+  min-width: 280px; /* Prevent the containers from shrinking too much */
+  max-width: 23%; /* Reduce width to make them smaller */
+}
+
+.ai-settings-container,
+.module-settings-container {
+  flex: 1; /* Equal width for all containers */
+  min-width: 280px; /* Prevent the containers from shrinking too much */
+  max-width: 28%; /* Reduce width to make them smaller */
+}
+
+/* make labels under .module-settings-container to be normal */
+.module-settings-container label {
+  font-weight: normal;
+}
+/* Optional: Adjust padding and margins for compact design */
+.aipower-content-wrapper .aipower-category-container {
+  padding: 8px; /* Slightly reduce padding for compactness */
+  margin-bottom: 0; /* No bottom margin */
+}
+
+.aipower-collapsible-section {
+  margin-bottom: 10px; /* Add space between sections */
+}
+
+/* Ensure the active tab label is bold */
+.aipower-collapsible-section.active .aipower-collapsible-toggle label {
+  font-weight: bold;
+}
+
+/* Reset the font weight for non-active tab labels */
+.aipower-collapsible-section .aipower-collapsible-toggle label {
+  font-weight: normal; /* Reset for all labels */
+}
+
+/* Optional: Add specificity to ensure non-active tabs are not bold */
+.aipower-collapsible-section:not(.active) .aipower-collapsible-toggle label {
+  font-weight: normal;
+}
+
+.aipower-woocommerce-labels {
+  display: block;
+  margin-bottom: 5px;
+  margin-top: 2px;
+  margin-right: 5px;
+  cursor: pointer;
+  font-weight: normal;
+}
+
+.aipower-collapsible-toggle {
+  width: 100%;
+  text-align: left;
+  background-color: #f1f1f1;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  outline: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  display: flex;
+}
+
+.aipower-collapsible-toggle:hover {
+  background-color: #ddd;
+}
+
+.aipower-collapsible-content {
+  display: none;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+.aipower-collapsible-section.active .aipower-collapsible-content {
+  display: block;
+}
+.aipower-copy-text {
+  font-size: 12px;
+  color: #555;
+}
+
+.aipower-woocommerce-shortcode {
+  color: #0073aa;
+  cursor: pointer;
+  text-decoration: underline;
+  position: relative;
+}
+
+.aipower-woocommerce-shortcode:hover {
+  color: #005f8d;
+}
+
+.aipower-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 5px;
+  font-size: 10px;
+  border-radius: 3px;
+  white-space: nowrap;
+  display: none;
+}
+.aipower-dropdown-container {
+  margin-bottom: 15px;
+}
+/* Modal Styles */
+.aipower-modal {
+  position: fixed;
+  z-index: 99999999999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ensure the modal body is scrollable when content is large */
+.aipower-modal-body {
+    overflow-y: auto;
+    max-height: 80vh; /* Limit height to 80% of viewport height */
+    padding-right: 15px; /* Add some padding so scrollbar doesn't overlap content */
+}
+
+.aipower-modal-body::-webkit-scrollbar {
+    width: 5px;
+}
+
+.aipower-modal-body::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+.aipower-modal-body::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+.aipower-modal-body::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+.aipower-modal-body h3 {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+  width: fit-content;
+  font-size: 13px;
+}
+
+.aipower-modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+}
+.aipower-modal-content label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+/* Modal Header: Close button and Title on the same line */
+.aipower-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+}
+
+.aipower-modal-header h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #333;
+}
+
+.aipower-close {
+  font-size: 20px;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.aipower-close:hover {
+  color: #000;
+}
+
+/* Textarea specific styling */
+.aipower-form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Footer for modal explanations and actions */
+.aipower-custom-prompt-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.aipower-custom-prompt-explanation {
+  font-size: 14px;
+  color: #666;
+  flex: 1;
+  margin-right: 10px;
+}
+
+/* Reset Button Styling */
+.aipower-button.reset-button {
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.aipower-button.reset-button:hover {
+  background-color: #d32f2f;
+}
+
+/* Shortcode styling */
+.aipower-toggle-shortcode-small {
+  display: inline-block;
+  background-color: #f0f8ff;
+  color: #0073e6;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+/* Flexbox for grouped form elements in Semantic Search Modal */
+.aipower-grouped-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.aipower-grouped-fields div {
+  flex: 1;
+  min-width: 150px; /* Ensure elements don't get too narrow */
+}
+
+.aipower-grouped-fields label {
+  display: inline-block;
+  margin-bottom: 5px;
+  font-weight: normal;
+  margin-right: 5px;
+}
+
+.aipower-grouped-fields select,
+.aipower-grouped-fields input[type="color"],
+.aipower-grouped-fields input[type="text"] {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#aipower_ai_assistant_modal .aipower-form-group {
+  margin-bottom: 15px;
+}
+
+#aipower_ai_assistant_modal .aipower-form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+#aipower_ai_assistant_modal select,
+#aipower_ai_assistant_modal input[type="text"],
+#aipower_ai_assistant_modal textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+#aipower_ai_assistant_modal textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+#aipower_ai_assistant_modal small {
+  color: #555;
+  font-style: italic;
+}
+#aipower_ai_assistant_modal .aipower-menu-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#aipower_ai_assistant_modal .dashicons {
+  cursor: pointer;
+}
+
+#aipower_ai_assistant_modal .dashicons:hover {
+  color: #005bb5;
+}
+
+#aipower_ai_assistant_modal .dashicons-trash:hover {
+  color: #f44336; /* Red color for delete */
+}
+#aipower-confirm-delete {
+  color: #f44336;
+}
+/* Style for the 'Yes' button */
+#aipower-confirm-yes-delete {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer; /* Cursor pointer only for the button */
+  margin-left: 10px;
+}
+
+#aipower-confirm-yes-delete:hover {
+  background-color: #d32f2f;
+}
+.aipower-pro-feature-label {
+  display: inline-flex; /* Ensures proper alignment */
+  align-items: center;
+  justify-content: center;
+  background-color: #4db154; /* Solid color instead of gradient */
+  color: #ffffff;
+  padding: 0.15em 0.6em; /* Reduced padding for compactness */
+  border-radius: 12px; /* Slightly smaller radius for a compact pill shape */
+  font-size: 0.65rem; /* Smaller font size */
+  font-weight: 600; /* Bold for readability */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
+    /* Subtle shadow */ 0 1px 2px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  margin-left: auto; /* Align to the right */
+  user-select: none; /* Prevent text selection */
+  text-decoration: none; /* Remove underline from links */
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    background-color 0.2s ease,
+    /* Changed to background-color */ color 0.2s ease; /* Faster transitions for responsiveness */
+}
+
+.aipower-pro-feature-label:hover,
+.aipower-pro-feature-label:focus {
+  color: #e0e0e0; /* Lighten text color on hover for contrast */
+  background-color: #1bb126; /* Lighter color on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15),
+    /* Enhanced shadow for depth */ 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px); /* Slight lift effect */
+  outline: none; /* Remove default focus outline */
+}
+
+.aipower-pro-feature-label:focus-visible {
+  outline: 1px dashed #ffffff;
+  outline-offset: 2px;
+}
+.aipower-toggle-switch.active {
+  color: green;
+  cursor: pointer;
+}
+
+.aipower-toggle-switch.inactive {
+  color: grey;
+  cursor: pointer;
+}
+
+/* Tooltip Styling */
+.aipower-replicate-tooltip {
+  background: #333;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  display: none;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  word-wrap: break-word;
+  /* Positioning is handled via inline styles in JavaScript */
+}
+
+/* Help Icon Styling */
+.aipower-replicate-help-icon {
+  color: #007cba;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+/* Tooltip Icon */
+.aipower-tooltip-icon {
+  cursor: pointer;
+  color: #0073aa; /* Primary blue color */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-family: "Dashicons", sans-serif; /* Ensure Dashicons are loaded */
+  font-size: 20px; /* Keep the icon at 20px */
+  display: inline-block; /* Ensure it's inline for vertical alignment */
+  vertical-align: top;
+}
+
+.aipower-tooltip-icon::before {
+  content: "\f223"; /* Dashicon code for 'info' icon */
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* Show icon on hover of label or icon */
+label:hover + .aipower-tooltip-icon,
+.aipower-tooltip-icon:hover {
+  opacity: 1;
+}
+
+/* Tooltip Content */
+.aipower-tooltip-content {
+  background-color: #000;
+  color: #fff;
+  padding: 0 10px;
+  border-radius: 4px;
+  position: absolute;
+  z-index: 9999;
+  width: 350px; /* Fixed width for consistency */
+  word-wrap: break-word; /* Enable text wrapping */
+  text-align: left;
+  pointer-events: auto;
+  visibility: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Visible state: Tooltip shown */
+.aipower-tooltip-content.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.aipower-tooltip-content a {
+  color: #1e90ff; /* Link color */
+  text-decoration: underline;
+}
+
+.aipower-tooltip-content a:hover {
+  text-decoration: none; /* Optional: Change hover behavior */
+}
+.aipower-form-group input[disabled] {
+  opacity: 1;
+}
+.aipower-general-switch-label {
+  font-size: 13px; /* Ensure the label has the desired font size */
+  margin-right: 8px; /* Space between label and icon */
+  display: inline-block; /* Ensure it's inline for vertical alignment */
+  vertical-align: middle; /* Align with the middle of the icon */
+}
+
+/* Show icon on hover of label or icon */
+.aipower-general-switch-label:hover + .aipower-tooltip-icon,
+.aipower-tooltip-icon:hover {
+  opacity: 1;
+}
+
+/* Responsive Adjustments for Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+  /* Modal Adjustments */
+  .aipower-modal-content {
+    width: 95%;
+  }
+  /* Form Group Adjustments */
+  .aipower-form-group input[type="text"],
+  .aipower-form-group input[type="number"],
+  .aipower-form-group select {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .aipower-form-group,
+  .aipower-form-subgroup {
+    width: 100%;
+  }
+
+  /* Subgroup Adjustments */
+  .aipower-form-subgroup {
+    margin-left: 10px;
+    padding-left: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Custom Prompt Footer */
+  .aipower-custom-prompt-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .aipower-custom-prompt-explanation {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  /* Category Container Adjustments */
+  .aipower-category-container {
+    padding: 10px;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .aipower-category-container h3 {
+    font-size: 16px;
+  }
+
+  /* Tab Navigation Adjustments */
+  .aipower-top-navigation ul {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .aipower-nav-link {
+    margin-bottom: 2px;
+    width: 100%;
+  }
+
+  .aipower-tabs {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .aipower-tab-btn {
+    width: 100%;
+    margin: 0;
+  }
+
+  .aipower-tab-content {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Image Settings Adjustments */
+  .aipower-image-settings {
+    grid-template-columns: 1fr;
+  }
+
+  .aipower-image-settings-table th,
+  .aipower-image-settings-table td {
+    padding: 2px 4px;
+  }
+
+  /* Container Adjustments */
+  .aipower-content-wrapper {
+    flex-direction: column;
+  }
+
+  .content-settings-container,
+  .seo-settings-container,
+  .image-settings-container,
+  .woocommerce-settings-container,
+  .additional-settings-container,
+  .common-settings-container,
+  .search-settings-container,
+  .ai-settings-container,
+  .module-settings-container {
+    max-width: 100%;
+  }
+}
+
+/* Responsive Adjustments for Small Screens (max-width: 480px) */
+@media (max-width: 480px) {
+  .aipower-form-group {
+    width: 100%; /* Full width on very small screens */
+  }
+}
+
+/* Responsive Adjustments for smaller screens */
+@media (max-width: 768px) {
+  .aipower-grouped-fields div {
+    flex-basis: 48%; /* Reduce the width of each element to fit two per row */
+    min-width: 100px; /* Adjust min-width for better responsiveness */
+  }
+}
+
+@media (max-width: 480px) {
+  .aipower-grouped-fields div {
+    flex-basis: 100%; /* Full width for each element on very small screens */
+  }
+}

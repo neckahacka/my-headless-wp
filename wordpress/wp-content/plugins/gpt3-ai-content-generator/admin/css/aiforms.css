@@ -1,0 +1,832 @@
+/* --- Global palette (light, clean) --- */
+body {
+    box-sizing: border-box;
+    background: #f3f0e7;
+    color: #4b5563;
+}
+
+:root {
+    --wpaicg-bg-color: #fafafa;          /* Light background */
+    --wpaicg-border-color: #d2d2d7;      /* Subtle gray border */
+    --wpaicg-text-color: #333;           /* Dark text color */
+    --wpaicg-primary-color: #007aff;
+}
+
+/* Container for AI Forms top icons */
+.wpaicg_button_container.apple-like {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid var(--wpaicg-border-color);
+    border-radius: 8px;
+    padding: 8px 16px;
+    margin-bottom: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.wpaicg_top_icons_left {
+    display: flex;
+    align-items: center;
+    position: relative;
+    gap: 16px;
+}
+.wpaicg_top_icons_right {
+    display: flex;
+    align-items: center;
+    position: relative;
+    gap: 16px;
+    margin-left: auto;
+}
+
+/* Icon styling */
+.wpaicg_icon {
+    cursor: pointer;
+    font-size: 20px;
+}
+.wpaicg_icon.small {
+    font-size: 16px;
+    line-height: 20px;
+}
+h1 .wpaicg_icon.small {
+    vertical-align: text-bottom;
+}
+.wpaicg_icon.small svg {
+    width: 16px !important;
+    height: 16px !important;
+}
+
+/* Search box styling */
+#wpaicg_search_container {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    margin-right: 8px;
+}
+#wpaicg_search_container input[type="search"] {
+    padding: 6px 12px;
+    border: 1px solid var(--wpaicg-border-color);
+    border-radius: 9999px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background-color: #f9f9f9;
+    height: 24px;
+    line-height: 24px;
+}
+#wpaicg_search_container input[type="search"]:focus {
+    border-color: var(--wpaicg-primary-color);
+    background-color: #fff;
+    box-shadow: 0 0 0 2px rgba(0,122,255,0.1);
+}
+
+/* Menu dropdown */
+#wpaicg_menu_dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    border: 1px solid var(--wpaicg-border-color);
+    border-radius: 6px;
+    padding: 8px;
+    gap: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+}
+#wpaicg_menu_dropdown .button {
+    display: block;
+    width: 100%;
+    margin-bottom: 8px;
+    text-align: left;
+}
+#wpaicg_menu_dropdown .button:last-child {
+    margin-bottom: 0;
+}
+
+/* Main container/flex layout */
+#wpaicg_aiforms_container {
+    padding: 16px;
+    border: 1px solid var(--wpaicg-border-color);
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    margin-bottom: 16px;
+}
+.wpaicg_flex {
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+    margin: -16px;
+}
+.wpaicg_left_column,
+.wpaicg_right_column {
+    padding: 16px;
+}
+.wpaicg_left_column {
+    flex: 0 0 220px;
+    border-right: 1px solid var(--wpaicg-border-color);
+    display: flex;
+    flex-direction: column;
+}
+.wpaicg_right_column {
+    flex: 1;
+    position: relative;
+}
+.wpaicg_left_column h4 {
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 15px;
+}
+.wpaicg_author_list,
+.wpaicg_cat_list {
+    list-style: none;
+    margin: 0 0 20px;
+    padding: 0;
+}
+.wpaicg_author_list li,
+.wpaicg_cat_list li {
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+.wpaicg_author_list input[type="checkbox"],
+.wpaicg_cat_list input[type="checkbox"] {
+    margin-right: 4px;
+}
+
+/* forms grid */
+.wpaicg_forms_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+    margin-top: 10px;
+}
+
+/* Redesigned form item card */
+.wpaicg_form_item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--wpaicg-bg-color);
+    border: 1px solid var(--wpaicg-border-color);
+    border-radius: 6px;
+    padding: 16px;
+    transition: box-shadow 0.2s;
+    position: relative;
+    cursor: pointer;
+}
+.wpaicg_form_item:hover {
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.wpaicg_form_icon_wrapper {
+    flex-shrink: 0;
+    width: 70px;
+    height: 70px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* The background-color is set inline from PHP,
+       so we do not override it here. */
+}
+.wpaicg_form_icon_wrapper .dashicons {
+    color: #fff;
+    font-size: 20px;
+}
+/* Text container within each card */
+.wpaicg_form_text {
+    display: flex;
+    flex-direction: column;
+}
+.wpaicg_form_text h5 {
+    margin: 0 0 4px;
+    font-size: 15px;
+    font-weight: 600;
+}
+.wpaicg_form_text p {
+    margin: 0;
+    font-size: 13px;
+    color: #666;
+}
+
+/* Preview panel */
+.wpaicg_preview_panel {
+    display: none;
+    background: #fefefe;
+}
+.wpaicg_preview_actions {
+    margin-bottom: 20px;
+}
+.wpaicg_preview_back {
+    margin-right: 5px;
+    background: #eee;
+    color: #333;
+    border: 1px solid var(--wpaicg-border-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .wpaicg_flex {
+        flex-direction: column;
+        margin: 0;
+    }
+    .wpaicg_left_column {
+        border-right: none;
+        border-bottom: 1px solid var(--wpaicg-border-color);
+        flex: 0 0 auto;
+    }
+}
+
+/* Sidebar hidden */
+.wpaicg_flex.wpaicg_sidebar_hidden .wpaicg_left_column {
+    display: none;
+}
+.wpaicg_flex.wpaicg_sidebar_hidden .wpaicg_right_column {
+    flex: 1;
+}
+
+/* Drag & Drop Form Builder */
+#wpaicg_create_container,
+#wpaicg_edit_container {
+    padding: 16px;
+    border: 1px solid var(--wpaicg-border-color);
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    margin-bottom: 16px;
+}
+
+.wpaicg_form_builder {
+    display: flex;
+    gap: 20px;
+}
+.builder_left,
+.builder_center,
+.builder_right {
+    flex: 1;
+    background: #f9f9f9;
+    border: 1px solid var(--wpaicg-border-color);
+    border-radius: 8px;
+    padding: 16px;
+}
+.builder_left h3,
+.builder_center h3,
+.builder_right h3 {
+    margin-top: 0;
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+.builder_left ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.builder_left li {
+    background: #fff;
+    border: 1px solid var(--wpaicg-border-color);
+    padding: 8px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    cursor: move;
+    text-align: center;
+}
+.builder_fields_dropzone {
+    min-height: 150px;
+    background: #fff;
+    border: 2px dashed var(--wpaicg-border-color);
+    border-radius: 6px;
+    padding: 16px;
+    position: relative;
+}
+.builder_placeholder {
+    text-align: center;
+    color: #aaa;
+    margin: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    width: 100%;
+    left: 0;
+}
+
+.builder_field_item {
+    background: #fcfcfc;
+    border: 1px solid var(--wpaicg-border-color);
+    border-radius: 4px;
+    padding: 8px;
+    margin-bottom: 8px;
+    position: relative;
+    cursor: move; /* for reordering */
+}
+.builder_field_item .remove_field {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    cursor: pointer;
+    color: #999;
+    font-size: 20px;
+    font-weight: bold;
+}
+.builder_label_input,
+.builder_id_input {
+    width: 100%;
+    margin-top: 2px;
+    box-sizing: border-box;
+    border: 1px solid var(--wpaicg-border-color);
+    border-radius: 3px;
+    padding: 4px;
+    font-size: 13px;
+}
+
+/* Settings icon */
+.builder_settings_icon {
+    position: absolute;
+    top: 4px;
+    right: 20px;
+    cursor: pointer;
+    color: #999;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Settings panel inside each field */
+.field_settings {
+    margin-top: 8px;
+    padding: 8px;
+    border: 1px solid var(--wpaicg-border-color);
+    border-radius: 4px;
+    background-color: #fff;
+    display: none;
+}
+.field_settings label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 500;
+    font-size: 13px;
+}
+.field_settings input[type="number"],
+.field_settings input[type="text"],
+.field_settings textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid var(--wpaicg-border-color);
+    border-radius: 3px;
+    padding: 4px;
+    margin-bottom: 6px;
+    font-size: 13px;
+}
+
+/* Visual feedback for reorder drag */
+.builder_field_item.drag-top {
+    border-top: 3px solid var(--wpaicg-primary-color);
+}
+.builder_field_item.drag-bottom {
+    border-bottom: 3px solid var(--wpaicg-primary-color);
+}
+
+/* Table styling for logs */
+#wpaicg_logs_container table.widefat {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+}
+#wpaicg_logs_container table.widefat th,
+#wpaicg_logs_container table.widefat td {
+    border: 1px solid var(--wpaicg-border-color);
+    padding: 8px;
+}
+/* We have 7 columns for ID, Name, Model, Duration, Tokens, Response, Date */
+#wpaicg_logs_container table.widefat th:nth-child(1),
+#wpaicg_logs_container table.widefat td:nth-child(1) {
+    width: 5%;
+}
+#wpaicg_logs_container table.widefat th:nth-child(2),
+#wpaicg_logs_container table.widefat td:nth-child(2) {
+    width: 10%;
+}
+#wpaicg_logs_container table.widefat th:nth-child(3),
+#wpaicg_logs_container table.widefat td:nth-child(3) {
+    width: 10%;
+}
+#wpaicg_logs_container table.widefat th:nth-child(4),
+#wpaicg_logs_container table.widefat td:nth-child(4) {
+    width: 10%;
+}
+#wpaicg_logs_container table.widefat th:nth-child(5),
+#wpaicg_logs_container table.widefat td:nth-child(5) {
+    width: 10%;
+}
+#wpaicg_logs_container table.widefat th:nth-child(6),
+#wpaicg_logs_container table.widefat td:nth-child(6) {
+    width: 35%;
+}
+#wpaicg_logs_container table.widefat th:nth-child(7),
+#wpaicg_logs_container table.widefat td:nth-child(7) {
+    width: 20%;
+}
+
+#wpaicg_logs_pagination {
+    margin-top: 10px;
+    text-align: left;
+}
+#wpaicg_logs_pagination .wpaicg_logs_page_link {
+    display: inline-block;
+    margin: 0 4px;
+    padding: 4px 8px;
+    background: #f1f1f1;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#wpaicg_logs_pagination .wpaicg_logs_page_link.active {
+    background: var(--wpaicg-primary-color);
+    color: #fff;
+}
+
+/* Modal styling for full prompt/response */
+#wpaicg_log_modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    overflow: auto;
+}
+#wpaicg_log_modal .wpaicg_log_modal_content {
+    background: #fff;
+    width: 600px;
+    height: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+    overflow-y: auto;
+}
+.wpaicg_log_modal_close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Make truncated text in logs clickable & bluish */
+.wpaicg_log_view {
+    color: #005faf;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* Settings page overlay / modal for role-limits */
+.wpaicg-overlay-second {
+    display: none;
+    position: fixed;
+    z-index: 99999;
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    background: rgba(0,0,0,0.35);
+    justify-content: center; 
+    align-items: center;
+}
+.wpaicg_modal_second {
+    background: #fff;
+    width: 400px;
+    border-radius: 8px;
+    padding: 20px;
+    position: relative;
+    max-height: 80vh; /* allow scrolling */
+    overflow-y: auto;
+}
+.wpaicg_modal_close_second {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+}
+.wpaicg_modal_title_second {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+.wpaicg_modal_content_second {
+    /* dynamic content inserted */
+}
+
+/* Inline message styles for the new Settings area */
+#wpaicg_settings_inline_message.updated {
+    background: #e4fbe4;
+    border-left: 4px solid #4caf50;
+    padding: 8px;
+}
+#wpaicg_settings_inline_message.error {
+    background: #fde4e4;
+    border-left: 4px solid #f44336;
+    padding: 8px;
+}
+
+/* NEW: Global inline messages (success/error) for the Beta UI */
+#wpaicg_global_message {
+    margin: 10px 0;
+    padding: 10px;
+    border-left: 4px solid #38a169;
+    background-color: #c6f6d5;
+    color: #2f855a;
+    display: none;
+}
+#wpaicg_global_message.error {
+    border-color: #e53e3e;
+    background-color: #fed7d7;
+    color: #c53030;
+}
+
+/* --------------------------------------------- */
+/* NEW TAB STYLING FOR THE EDIT PAGE (5 tabs)    */
+/* --------------------------------------------- */
+
+.wpaicg_edit_tabs {
+    display: flex;
+    border-bottom: 1px solid var(--wpaicg-border-color);
+    margin-bottom: 16px;
+    list-style: none;
+    padding-left: 0;
+}
+.wpaicg_edit_tabs li {
+    margin-right: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    border: 1px solid var(--wpaicg-border-color);
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
+    background: #f9f9f9;
+}
+.wpaicg_edit_tabs li.active {
+    background: #fff;
+    border-bottom: 1px solid #fff;
+}
+.wpaicg_edit_tab_content {
+    display: none; /* hidden by default; shown when active */
+}
+.wpaicg_edit_tab_content.active {
+    display: block;
+    margin-top: -5px;
+}
+
+/* Bottom buttons at the end of edit container */
+.wpaicg_edit_bottom_buttons {
+    margin-top: 16px;
+    text-align: right;
+}
+.wpaicg_edit_bottom_buttons button {
+    margin-left: 8px;
+}
+
+/* --------------------------------------------- */
+/* NEW TAB STYLING FOR THE CREATE PAGE (5 tabs)  */
+/* --------------------------------------------- */
+
+.wpaicg_create_tabs {
+    display: flex;
+    border-bottom: 1px solid var(--wpaicg-border-color);
+    margin-bottom: 16px;
+    list-style: none;
+    padding-left: 0;
+}
+.wpaicg_create_tabs li {
+    margin-right: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    border: 1px solid var(--wpaicg-border-color);
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
+    background: #f9f9f9;
+}
+.wpaicg_create_tabs li.active {
+    background: #fff;
+    border-bottom: 1px solid #fff;
+}
+.wpaicg_create_tab_content {
+    display: none; /* hidden by default; shown when active */
+}
+.wpaicg_create_tab_content.active {
+    display: block;
+    margin-top: -5px;
+}
+
+/* --------------------------------------------- */
+/* ID Snippet Styling for Prompt Section         */
+/* --------------------------------------------- */
+.wpaicg_id_snippets {
+    margin-top: 6px;
+}
+.wpaicg_snippet {
+    display: inline-block;
+    font-size: 12px;
+    background: #f1f1f1;
+    color: #333;
+    padding: 2px 4px;
+    margin: 2px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.wpaicg_snippet:hover {
+    background: #e1e1e1;
+}
+.wpaicg_copied_msg {
+    font-size: 12px;
+    color: green;
+    margin-top: 4px;
+}
+
+/* --------------------------------------------- */
+/* Keep Tab Content a consistent min-height      */
+/* --------------------------------------------- */
+.wpaicg_create_tab_content,
+.wpaicg_edit_tab_content {
+    min-height: 500px; /* Adjust as desired for a consistent base height */
+}
+
+/* add_option_btn greyish tone */
+.add_option_btn {
+    display: inline-block;
+    padding: 6px 12px;
+    background: #f1f1f1;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* wpaicg_preview_form_container must have max width 50% */
+.wpaicg_preview_form_container {
+    max-width: 50%;
+}
+
+/* -------------------------------------------------- */
+/* NEW: True Modal styling for Model Settings overlays */
+/* -------------------------------------------------- */
+.wpaicg_model_settings_modal {
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    overflow: hidden; /* Prevent modal overflow */
+}
+
+.wpaicg_model_settings_modal_content {
+    background: #fff;
+    border-radius: 8px;
+    position: relative;
+    width: 600px;
+    max-width: 90%;
+    max-height: 80vh; /* Set a max height to allow scrolling */
+    overflow-y: auto; /* Enable scrolling if content is too tall */
+    margin: 60px auto;
+    padding: 20px;
+}
+
+.wpaicg_modal_close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+#wpaicg_preview_panel .wpaicg_preview_form_container input[type="text"],
+#wpaicg_preview_panel .wpaicg_preview_form_container input[type="email"],
+#wpaicg_preview_panel .wpaicg_preview_form_container input[type="number"],
+#wpaicg_preview_panel .wpaicg_preview_form_container input[type="url"],
+#wpaicg_preview_panel .wpaicg_preview_form_container input[type="checkbox"],
+#wpaicg_preview_panel .wpaicg_preview_form_container select,
+#wpaicg_preview_panel .wpaicg_preview_form_container textarea {
+    /* line heigt unset */
+    line-height: unset;
+    /* min-height unset */
+    min-height: unset;
+    /* max-width unset */
+    max-width: unset;
+    width: 50%;
+}
+
+#wpaicg_preview_panel .wpaicg_preview_form_container input[type="checkbox"] {
+    width: unset;
+}
+
+
+/* -------------------------------------- */
+/* NEW: Switch styling for toggles        */
+/* -------------------------------------- */
+.wpaicg-switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 22px;
+    vertical-align: middle;
+}
+.wpaicg-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.wpaicg-switch .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+.wpaicg-switch .slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: #fff;
+    transition: .4s;
+    border-radius: 50%;
+}
+.wpaicg-switch input:checked + .slider {
+    background-color: var(--wpaicg-primary-color);
+}
+.wpaicg-switch input:checked + .slider:before {
+    transform: translateX(18px);
+}
+/* Container for the pagination */
+.wpaicg_forms_pagination {
+    display: inline-block; /* so it only takes as much width as needed */
+    margin-top: 15px;
+    text-align: center;
+    font-family: inherit; /* inherit font from the parent container */
+}
+
+/* Common style for all pagination elements */
+.wpaicg_forms_pagination span {
+    display: inline-block;
+    padding: 6px 10px;
+    margin: 0 3px;
+    font-size: 14px;
+    line-height: 1.2;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    color: #333;
+    background: #f9f9f9;
+}
+
+/* Hover effect for page links */
+.wpaicg_forms_pagination span.wpaicg_forms_page_link:hover {
+    background: #eee;
+    border-color: #bbb;
+}
+
+/* Active page link */
+.wpaicg_forms_pagination span.wpaicg_forms_page_link.active {
+    background: #2271b1; /* WordPress primary blue */
+    color: #fff;
+    border-color: #1a578c;
+}
+
+/* Dots/ellipsis styling */
+.wpaicg_forms_pagination span.wpaicg_forms_page_ellipsis {
+    cursor: default; /* not clickable */
+    background: transparent;
+    border: none;
+    color: #999;
+}
+.wpaicg_logs_table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+}
+
+.wpaicg_logs_table th,
+.wpaicg_logs_table td {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.wpaicg_logs_table th {
+    background-color: #f8f8f8;
+    font-weight: 600;
+}
+
+.wpaicg_logs_table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.wpaicg_logs_table tr:hover {
+    background-color: #f1f1f1;
+}

@@ -1,0 +1,1550 @@
+/* Existing CSS */
+
+/* Reduce margin below the button */
+#aipower-add-new-bot-btn,
+#aipower-done-editing-btn {
+    margin-bottom: 10px;
+    /* Less space between button and content */
+}
+
+/* Compact table styles */
+.aipower-chatbot-table {
+    border-collapse: collapse;
+    margin-bottom: 10px;
+    /* Reduced margin */
+    width: 100%;
+    /* Ensure the table takes full width */
+    table-layout: fixed;
+    /* Enforce fixed layout */
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+.aipower-chatbot-table th,
+.aipower-chatbot-table td {
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    overflow: hidden;
+    /* Hide overflowing content */
+    white-space: nowrap;
+    /* Prevent text from wrapping */
+    text-overflow: ellipsis;
+    /* Add ellipsis for overflowing text */
+    padding: 8px 10px;
+    max-width: 100%;
+    /* Ensure cells don't exceed their column width */
+}
+
+/* Fixed width for Actions column */
+.aipower-chatbot-table th:last-child,
+.aipower-chatbot-table td:last-child {
+    width: 150px;
+    /* Fixed width for Actions column */
+    min-width: 150px;
+    /* Prevent shrinking */
+    text-align: center;
+    /* Center align the action icons */
+    white-space: nowrap;
+    /* Keep icons in a single line */
+    overflow: visible;
+    /* Allow overflow for tooltips */
+}
+
+/* Header styling */
+.aipower-chatbot-table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+/* Cell content styling */
+.aipower-chatbot-table td {
+    vertical-align: middle;
+    /* Vertically center content */
+}
+
+.aipower-chatbot-table a {
+    color: #0073e6;
+    text-decoration: none;
+}
+
+.aipower-chatbot-table a:hover {
+    text-decoration: underline;
+}
+
+/* Enhanced Tooltip Styling */
+.aipower-chatbot-table td[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    font-size: 12px;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.aipower-chatbot-table td[title]:hover::after {
+    opacity: 1;
+}
+
+/* log table end */
+
+/* Ensure the bot creation section is hidden initially */
+#aipower-create-bot-section {
+    display: none;
+    /* Keep it hidden initially */
+    margin-bottom: 10px;
+    /* Add margin for spacing when shown */
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+}
+
+/* Transition effect when toggling visibility */
+#aipower-create-bot-section.active {
+    display: block;
+    transition: all 0.3s ease;
+}
+
+/* Compact pagination text */
+.aipower-page-btn,
+.aipower-pdfs-page-btn,
+.aipower-log-page-btn {
+    padding: 0;
+    /* No padding */
+    margin: 0 5px;
+    /* Space between numbers */
+    background-color: transparent;
+    /* No background color */
+    color: #0073e6;
+    /* Text color for pagination */
+    border: none;
+    /* No border */
+    cursor: pointer;
+    font-size: 12px;
+    /* Smaller font size */
+}
+
+.aipower-page-btn[disabled] {
+    color: #cccccc;
+    /* Disabled state color */
+    cursor: not-allowed;
+}
+
+.aipower-pdfs-page-btn[disabled] {
+    color: #cccccc;
+    /* Disabled state color */
+    cursor: not-allowed;
+}
+
+.aipower-log-page-btn[disabled] {
+    color: #cccccc;
+    /* Disabled state color */
+    cursor: not-allowed;
+}
+
+.aipower-pagination,
+.aipower-pdfs-pagination,
+.aipower-log-pagination {
+    margin-top: 10px;
+    /* Reduced margin */
+}
+
+/* Ensure chat preview container uses flex to align side by side */
+.aipower-chat-preview-container,
+.aipower-chat-log-container,
+.aipower-pdfs-container {
+    display: flex;
+    gap: 10px;
+    /* Space between chatbot and preview sections */
+    width: 100%;
+    box-sizing: border-box;
+    /* Ensure padding is included */
+}
+
+/* Chatbot table section takes up 40% of the width */
+.aipower-chat-section,
+.aipower-log-section,
+.aipower-pdfs-section {
+    flex: 0 0 40%;
+    /* Set fixed 40% width */
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    /* Add border */
+    padding: 10px;
+    /* Add some padding */
+    border-radius: 4px;
+    /* Optional: add rounded corners */
+    overflow-x: auto;
+    /* Enable horizontal scrolling */
+    overflow-y: auto;
+    /* Maintain vertical scrolling */
+}
+
+/* Preview section takes up 60% of the width */
+.aipower-preview-section,
+.aipower-pdf-preview-section,
+.aipower-log-preview-section {
+    flex: 0 0 60%;
+    /* Set fixed 60% width */
+    box-sizing: border-box;
+    overflow-y: auto;
+    /* Allow vertical scrolling if needed */
+    padding: 10px;
+    /* Add some padding */
+    margin-top: -10px;
+    /* Add margin at the top */
+}
+
+.aipower-pdf-preview-section,
+.aipower-log-preview-section {
+    margin-top: -30px;
+    /* Add margin at the top */
+}
+
+.aipower-preview-icon,
+.aipower-edit-icon,
+.aipower-delete-icon {
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.aipower-preview-icon:hover,
+.aipower-edit-icon:hover,
+.aipower-delete-icon:hover {
+    color: #0073e6;
+    /* Add hover effect */
+}
+
+/* Refined Modern Minimalist Accordion Button */
+.aipower-accordion-btn {
+    background-color: #2c3e50;
+    /* Soft dark background */
+    color: #ecf0f1;
+    /* Light text for contrast */
+    cursor: pointer;
+    padding: 4px 8px;
+    /* Reduced padding for a compact look */
+    width: 100%;
+    text-align: left;
+    border: none;
+    /* Clean without borders */
+    border-bottom: 1px solid #34495e;
+    /* Subtle separator */
+    font-weight: 600;
+    /* Semi-bold for emphasis */
+    font-size: 14px;
+    outline: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 4px;
+    /* Rounded edges */
+    margin-bottom: 4px;
+    /* Slight spacing between buttons */
+}
+
+.aipower-accordion-btn:last-child {
+    border-bottom: none;
+    /* Remove border from the last button */
+}
+
+.aipower-accordion-btn:hover,
+.aipower-accordion-btn.active {
+    background-color: #34495e;
+    /* Slightly lighter on hover/active */
+    color: #bdc3c7;
+    /* Lighter text color */
+}
+
+.aipower-accordion-btn::after {
+    content: '\25BC';
+    /* Down arrow */
+    font-size: 12px;
+    transition: transform 0.3s ease;
+}
+
+.aipower-accordion-btn.active::after {
+    transform: rotate(180deg);
+    /* Rotate arrow when active */
+}
+
+.aipower-accordion-panel {
+    padding: 8px;
+    /* Smaller padding */
+    display: none;
+    background-color: white;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    font-size: 12px;
+    /* Smaller font size for content */
+}
+
+
+/* -------------------- New CSS for Active Preview Buttons -------------------- */
+
+/* Style for active preview and edit buttons */
+.aipower-preview-btn.active,
+.aipower-preview-icon.active,
+.aipower-edit-icon.active {
+    color: #0073e6;
+    /* Blue color to indicate active state */
+    font-weight: bold;
+    /* Optional: Make the text bold */
+    background-color: #e6f0ff;
+    /* Light blue background */
+    border-radius: 4px;
+    /* Rounded corners */
+}
+
+/* Flex container for the New Bot button, tools icon, and menu */
+.aipower-tools-wrapper {
+    display: flex;
+    justify-content: space-between;
+    /* Space between the New Bot button and tools */
+}
+
+.aipower-tools-container {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+}
+
+#aipower-tools-icon,
+.aipower-pdf-tools-icon,
+.aipower-log-tools-icon {
+    cursor: pointer;
+    margin-left: 10px;
+    /* Space between icon and menu */
+}
+
+/* Tools Buttons Container */
+.aipower-tools-buttons {
+    margin-bottom: 15px;
+}
+
+/* Delete All Logs Button */
+.aipower-delete-all-btn {
+    background-color: #d63638;
+    color: #fff;
+    border-color: #d63638;
+}
+
+.aipower-delete-all-btn:hover {
+    background-color: #be2d2f;
+    border-color: #be2d2f;
+}
+
+/* Optional: Add spacing between buttons */
+.aipower-tools-buttons .button {
+    margin-right: 5px;
+}
+
+
+/* Ensure the tools menu appears next to the icon */
+#aipower-tools-menu,
+.aipower-pdf-tools-menu,
+.aipower-log-tools-menu {
+    display: none;
+    /* Hidden initially */
+    position: absolute;
+    right: 100%;
+    /* Position the menu to the left of the tools icon */
+    top: 0;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+    z-index: 1000;
+    white-space: nowrap;
+    /* Prevent menu from wrapping */
+}
+
+/* Styling for the action items in the menu */
+.aipower-tools-action {
+    padding: 5px 0;
+    cursor: pointer;
+    color: #0073e6;
+    text-align: left;
+}
+
+/* Add hover effect */
+.aipower-tools-action:hover {
+    text-decoration: underline;
+    color: #005bb5;
+}
+
+.aipower-custom-tools-menu {
+    display: none;
+    /* Hidden initially */
+    position: absolute;
+    /* Make it independent of the flow */
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+    z-index: 1000;
+    white-space: nowrap;
+    /* Prevent menu from wrapping */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.aipower-custom-tools-menu .dashicons {
+    display: block;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.aipower-custom-tools-menu .dashicons:hover {
+    color: #ff0000;
+    /* Change color on hover, adjust as needed */
+}
+
+#aipower-custom-tools-icon {
+    cursor: pointer;
+    position: relative;
+    /* Make the icon the reference point for absolute positioning */
+}
+
+/* Delete All specific styling */
+.aipower-delete-all {
+    color: #dc3545;
+    /* Red text */
+}
+
+/* Hover effect for Delete All */
+.aipower-delete-all:hover {
+    color: #c82333;
+    text-decoration: underline;
+}
+
+/* Confirmation prompt styling */
+.aipower-confirmation {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #f44336;
+    margin-right: 5px;
+}
+
+.aipower-confirm-yes {
+    cursor: pointer;
+    color: #0073e6;
+}
+
+.aipower-confirm-yes:hover {
+    text-decoration: underline;
+}
+
+/* Inline confirmation prompt for single delete */
+.aipower-single-delete-confirmation,
+.aipower-single-delete-pdf-confirmation {
+    display: none;
+    /* Hidden by default */
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    color: #f44336;
+    margin-top: 5px;
+    font-size: 12px;
+    position: absolute;
+    /* Positioning to appear below the icons */
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+/* Show class to display the confirmation prompt */
+.aipower-single-delete-confirmation.show {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Show class to display the confirmation prompt */
+.aipower-single-delete-pdf-confirmation.show {
+    display: flex;
+}
+
+/* Styles for the "Yes" button */
+.aipower-single-confirm-yes,
+.aipower-single-confirm-pdf-yes {
+    cursor: pointer;
+    color: #0073e6;
+}
+
+.aipower-single-confirm-yes:hover,
+.aipower-single-confirm-pdf-yes:hover {
+    text-decoration: underline;
+}
+
+
+/* Toggle Switch Styles */
+.aipower-switch {
+    position: relative;
+    display: inline-block;
+    width: 34px;
+    height: 20px;
+}
+
+.aipower-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.aipower-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.aipower-slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.aipower-slider {
+    background-color: #0073e6;
+}
+
+input:focus+.aipower-slider {
+    box-shadow: 0 0 1px #0073e6;
+}
+
+input:checked+.aipower-slider:before {
+    transform: translateX(14px);
+}
+
+
+#aipower-shortcode-display {
+    word-break: break-all;
+    /* Break long URLs */
+}
+
+.aipower-chatbot-table .dashicons:hover {
+    color: #005bb5;
+    /* Darker color on hover for better visibility */
+}
+
+
+/* Style for the Icons */
+
+
+/* Flex container for icons to align them properly */
+.aipower-icons-container {
+    display: inline-flex;
+    /* Align icons horizontally within the Tools column */
+    align-items: center;
+    /* Vertically center icons */
+    gap: 4px;
+    /* Minimal space between icons */
+}
+
+/* Common styles for all icons */
+.aipower-icons-container .dashicons {
+    font-size: 16px;
+    /* Icon size */
+    vertical-align: middle;
+    /* Vertical alignment */
+    cursor: default;
+    /* Non-interactive */
+}
+
+/* Style for the Internet Icon */
+.aipower-internet-icon {
+    color: #0073e6;
+    /* Blueish color */
+}
+
+.aipower-internet-icon:hover {
+    color: #005bb5;
+    /* Darker blue on hover */
+}
+
+/* Style for the Image Upload Icon */
+.aipower-image-icon {
+    color: #28a745;
+    /* Green color */
+}
+
+.aipower-image-icon:hover {
+    color: #218838;
+    /* Darker green on hover */
+}
+
+/* Style for the Audio Icon */
+.aipower-audio-icon {
+    color: #c7bc0d;
+    /* Yellow color */
+}
+
+.aipower-audio-icon:hover {
+    color: #b3a900;
+    /* Darker yellow on hover */
+}
+
+/* Style for the Streaming Icon */
+.aipower-streaming-icon {
+    color: #9b59b6;
+    /* Purple color */
+}
+
+.aipower-streaming-icon:hover {
+    color: #8e44ad;
+    /* Darker purple on hover */
+}
+
+/* Style for the Vector DB Icon */
+.aipower-vector-db-icon {
+    color: #196c16;
+    /* Green color */
+}
+
+.aipower-vector-db-icon:hover {
+    color: #0d4d0d;
+    /* Darker green on hover */
+}
+
+/* Style for the Vector DB Icon */
+.aipower-pdf-icon {
+    color: #FF0000;
+    /* Red color */
+}
+
+.aipower-pdf-icon:hover {
+    color: #cc0000;
+    /* Darker red on hover */
+}
+
+
+/* Custom Scrollbar for Table Container */
+.aipower-chat-section::-webkit-scrollbar {
+    height: 8px;
+}
+
+.aipower-chat-section::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.aipower-chat-section::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.aipower-chat-section::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Custom Scrollbar for Log Table Container */
+.aipower-log-section::-webkit-scrollbar {
+    height: 8px;
+}
+
+.aipower-log-section::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.aipower-log-section::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.aipower-log-section::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Custom Scrollbar for Log Table Container */
+.aipower-pdfs-section::-webkit-scrollbar {
+    height: 8px;
+}
+
+.aipower-pdfs-section::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.aipower-pdfs-section::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.aipower-pdfs-section::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Hide the Delete Icon Placeholder */
+.aipower-delete-icon-placeholder {
+    visibility: hidden;
+    /* Make it invisible but still occupy space */
+    pointer-events: none;
+    /* Ensure it's not interactive */
+}
+
+.aipower-new-switch-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    /* Optional: Add space between items */
+}
+
+.aipower-new-switch-container .aipower-form-group {
+    display: flex;
+    flex-direction: column;
+    /* Ensure label is always on top */
+    align-items: flex-start;
+    /* Align items to the left */
+}
+
+.aipower-switch-icon-group {
+    display: flex;
+    align-items: flex-start;
+    /* Align items to the top */
+    gap: 10px;
+    /* Adjust space between the switch and icon */
+}
+
+.aipower-switch-label {
+    white-space: nowrap;
+    /* Prevent label from breaking into two lines */
+    overflow: hidden;
+    /* Hide overflow */
+    text-overflow: ellipsis;
+    /* Add ellipsis (...) for long text */
+    max-width: 150px;
+    /* Set maximum width for the label */
+}
+
+.wpaicg_chat_widget {
+    position: relative;
+}
+
+.wpaicg_chat_widget .wpaicg_toggle {
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.wpaicg_chat_widget .wpaicg_toggle img {
+    width: 75px;
+    height: 75px;
+}
+
+/* Flexbox for grouped form elements in Semantic Search Modal */
+.aipower-grouped-fields-bot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.aipower-conversation {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.aipower-log-message.user {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.aipower-log-message.ai {
+    background-color: #e9f7ef;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.aipower-grouped-fields-bot div {
+    flex: 1;
+}
+
+.wpaicg-chatbox-footer {
+    font-size: 0.75rem;
+    padding: 12px 20px;
+}
+
+/* inherit for hyperlink */
+.wpaicg-chatbox-footer a {
+    color: inherit;
+}
+
+.aipower-grouped-fields-bot label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: normal;
+}
+
+.aipower-grouped-fields-bot select,
+.aipower-grouped-fields-bot input[type="color"],
+.aipower-grouped-fields-bot input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.aipower-h3-chatbot-style {
+    margin-top: 0;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.aipower-grouped-fields-bot input[type="color"] {
+    height: 30px;
+    /* Set the desired height */
+}
+
+/* Instructions Row Styling */
+.aipower-instruction-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* Space between elements */
+    width: 100%;
+    flex-wrap: wrap;
+    /* Allow wrapping on smaller screens */
+}
+
+/* Instructions Label Styling */
+.aipower-instruction-label {
+    flex: 0 0 auto;
+    /* Prevent the label from stretching */
+    min-width: 120px;
+    /* Adjust as needed */
+    font-weight: bold;
+    /* Optional: Make the label bold */
+}
+
+/* Switch Styling (Ensure it doesn't stretch) */
+.aipower-instruction-switch {
+    flex: 0 0 auto;
+}
+
+/* Template Dropdown Styling */
+.aipower-instruction-template {
+    flex: 1 1 auto;
+    /* Allow the select to take up remaining space */
+    min-width: 150px;
+    /* Ensure a minimum width */
+}
+
+/* Instructions Textarea Styling */
+.aipower-instruction-textarea {
+    width: 100%;
+    margin-top: 10px;
+    /* Space above the textarea */
+}
+
+/* PDFs Table */
+.aipower-pdfs-table,
+.aipower-logs-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.aipower-pdfs-table th,
+.aipower-pdfs-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.aipower-pdfs-table th {
+    background-color: #f9f9f9;
+    text-align: left;
+}
+
+.aipower-logs-table th,
+.aipower-logs-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.aipower-logs-table th {
+    background-color: #f9f9f9;
+    text-align: left;
+}
+
+.aipower-logs-table td {
+    vertical-align: top;
+}
+
+.aipower-logs-table td strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.aipower-logs-table td {
+    max-width: 400px;
+    /* Adjust as needed */
+    word-wrap: break-word;
+}
+
+.aipower-logs-table td p {
+    margin: 0;
+}
+
+/* Truncate long messages with ellipsis */
+.aipower-logs-table td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.aipower-logs-table td strong {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+}
+
+/* Make the Message cell clickable with hover effects */
+.aipower-logs-table td.aipower-clickable-message {
+    cursor: pointer;
+    transition: background-color 0.3s;
+    position: relative;
+}
+
+.aipower-logs-table td.aipower-clickable-message:hover {
+    background-color: #f0f0f0;
+    /* Light gray background on hover */
+}
+
+/* Style for the timing text */
+.aipower-timing {
+    font-size: 0.9em;
+    color: #777;
+    margin-top: 5px;
+}
+
+/* Container for additional AI message info */
+.aipower-additional-info {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+    align-items: flex-start;
+    /* Align items to the top */
+    margin-left: -10px;
+}
+
+
+/* Confident Score styling */
+.aipower-confident-score {
+    background-color: #e0f7fa;
+    /* Light cyan background */
+    color: #00796b;
+    /* Teal text color */
+    border-radius: 15px;
+    font-size: 0.85em;
+}
+
+/* Placeholder for Prompt Details */
+.aipower-prompt-details {
+    background-color: #f1f8e9;
+    /* Light green background */
+    color: #33691e;
+    /* Dark green text color */
+    border-radius: 15px;
+    font-size: 0.85em;
+    cursor: pointer;
+    /* Indicate clickable */
+}
+
+/* Placeholder for Revise Answer */
+.aipower-revise-answer {
+    background-color: #fff3e0;
+    /* Light orange background */
+    color: #e65100;
+    /* Dark orange text color */
+    border-radius: 15px;
+    font-size: 0.85em;
+    cursor: pointer;
+    /* Indicate clickable */
+}
+
+.aipower-confident-score,
+.aipower-prompt-details,
+.aipower-revise-answer {
+    margin: 0;
+    /* Remove any default margins */
+    padding: 5px 10px;
+    /* Ensure consistent padding */
+}
+
+.aipower-confident-score,
+.aipower-prompt-details,
+.aipower-revise-answer {
+    line-height: 1.2;
+    /* Adjust as needed for better alignment */
+}
+
+.aipower-confident-score .dashicons,
+.aipower-prompt-details .dashicons,
+.aipower-revise-answer .dashicons {
+    vertical-align: middle;
+    /* Align icons with the text */
+}
+
+/* Optional: Hover effects for placeholders */
+.aipower-prompt-details:hover,
+.aipower-revise-answer:hover {
+    opacity: 0.8;
+}
+
+/* Action Icons */
+.aipower-view-pdf-icon,
+.aipower-delete-pdf-icon,
+.aipower-view-log-icon,
+.aipower-delete-log-icon {
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+/* Tools Buttons */
+.aipower-pdfs-tools-buttons {
+    margin-bottom: 15px;
+}
+
+.aipower-pdfs-tools-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.aipower-delete-all-pdfs-btn {
+    background-color: #d63638;
+    color: #fff;
+    border-color: #d63638;
+}
+
+.aipower-delete-all-pdfs-btn:hover {
+    background-color: #be2d2f;
+    border-color: #be2d2f;
+}
+
+/* PDFs Search Wrapper */
+.aipower-pdfs-search-wrapper {
+    margin-bottom: 15px;
+}
+
+#aipower-pdfs-search-input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Search Input Wrapper */
+.aipower-log-search-wrapper {
+    margin-bottom: 15px;
+}
+
+#aipower-log-search-input {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.aipower-details strong {
+    display: inline-block;
+    width: 80px;
+    /* Adjust width as needed */
+}
+
+/* CSS for Truncated Text with Ellipsis */
+.aipower-truncated {
+    display: inline-block;
+    max-width: 200px;
+    /* Adjust based on your table layout */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+}
+
+/* Optional: Enhance Tooltip Appearance */
+.aipower-truncated:hover {
+    cursor: pointer;
+    /* You can add more styles here for custom tooltips if desired */
+}
+
+#aipower-prompt-details-content {
+    max-height: 300px;
+    /* Adjust as necessary */
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Style for the Flag Icon in Messages */
+.aipower-flag-icon {
+    color: red;
+    margin-left: 10px;
+    /* Space between message text and flag icon */
+    cursor: default;
+    /* Non-interactive */
+    vertical-align: middle;
+    /* Align vertically with text */
+}
+
+/* Style for the Flag Reasons in Messages */
+.aipower-flag-reasons {
+    margin-left: 5px;
+    /* Space between icon and text */
+    color: red;
+    font-weight: bold;
+    font-size: 0.9em;
+    vertical-align: middle;
+    /* Align vertically with icon */
+}
+
+/* Optional: Style the Sync Buttons */
+.aipower-sync-voices-button,
+.aipower-sync-models-button,
+.aipower-sync-google-voices-button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #0073aa;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.aipower-sync-voices-button:hover,
+.aipower-sync-models-button:hover,
+.aipower-sync-google-voices-button:hover {
+    background-color: #005177;
+}
+
+.aipower-sync-voices-button:disabled,
+.aipower-sync-models-button:disabled,
+.aipower-sync-google-voices-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Adjust Dashicons inside buttons */
+.aipower-sync-voices-button .dashicons,
+.aipower-sync-models-button .dashicons,
+.aipower-sync-google-voices-button .dashicons {
+    margin-right: 5px;
+}
+
+/* Token Details Table */
+.aipower-token-details-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.aipower-token-details-table th,
+.aipower-token-details-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.aipower-token-details-table th {
+    background-color: #f2f2f2;
+}
+
+/* Info Icon Styling */
+.aipower-log-info-icon {
+    margin-left: 8px;
+    color: #0073aa;
+    cursor: pointer;
+}
+
+.aipower-log-info-icon:hover {
+    color: #005177;
+}
+
+.aipower-block-ip-icon {
+    cursor: pointer;
+    color: red;
+}
+
+.aipower-token-details-modal {
+    max-height: 400px;
+    /* Adjust the max height as needed */
+    overflow-y: auto;
+    /* Enable scrolling if content exceeds max height */
+    /* unset width to allow the modal to expand based on content */
+    width: unset;
+}
+
+/* Token Cell Styling */
+.aipower-token-cell {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* Info Icon Styling */
+.aipower-token-cell .aipower-log-info-icon {
+    flex-shrink: 0;
+    /* Prevent the icon from shrinking */
+    color: #0073aa;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.aipower-token-cell .aipower-log-info-icon:hover {
+    color: #005177;
+}
+
+.aipower-block-ip-icon.dashicons-yes {
+    color: green;
+}
+
+/* Feedback Icons Styling */
+.aipower-feedback-icon {
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.aipower-log-feedback {
+    margin-top: 5px;
+    /* Adds space between AI message and feedback */
+}
+
+.aipower-log-feedback .dashicons-thumbs-up {
+    color: green;
+}
+
+.aipower-log-feedback .dashicons-thumbs-down {
+    color: red;
+}
+
+.aipower-log-feedback-details {
+    vertical-align: middle;
+}
+
+.aipower-message-badges {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.aipower-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    margin-left: 5px;
+    font-size: 10px;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 3px;
+}
+
+.aipower-lead-details {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin: 10px 0;
+    border-left: 4px solid #4caf50;
+    /* Match the lead badge color */
+}
+
+.aipower-lead-details h4 {
+    margin-top: 0;
+}
+
+.aipower-lead-details p {
+    margin: 5px 0;
+}
+
+.aipower-feedback-badge {
+    background-color: #ff9800;
+    /* Orange */
+}
+
+.aipower-lead-badge {
+    background-color: #4caf50;
+    /* Green */
+}
+
+/* Scanning Light Effect */
+.aipower-scanning-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.aipower-scanning-overlay::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    /* Adjusted color */
+    animation: aipower-scanning 2s linear infinite;
+}
+
+/* Modal Lists Styling */
+#aipower-leads-list,
+#aipower-feedback-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#aipower-leads-list li,
+#aipower-feedback-list li {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+    background: #f9f9f9;
+    border-radius: 4px;
+}
+
+#aipower-leads-list li:last-child,
+#aipower-feedback-list li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+#aipower-leads-list li p,
+#aipower-feedback-list li p {
+    margin: 5px 0;
+}
+
+#aipower-leads-list li strong,
+#aipower-feedback-list li strong {
+    font-weight: bold;
+}
+
+/* Additional styling for labels */
+#aipower-leads-list li .aipower-label,
+#aipower-feedback-list li .aipower-label {
+    display: inline-block;
+    width: 120px;
+    font-weight: bold;
+    margin-right: 10px;
+    color: #333;
+}
+/* Make the modal body a bit more structured */
+.aipower-modal-body ul {
+    margin: 0;
+    padding: 0;
+}
+
+/* Ensure the modal body is scrollable when content is large */
+.aipower-modal-body {
+    overflow-y: auto;
+    max-height: 80vh;
+}
+
+.aipower-modal-body::-webkit-scrollbar {
+    width: 5px;
+}
+
+.aipower-modal-body::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+.aipower-modal-body::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+.aipower-modal-body::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+/* Subtle emphasis for AI and user timestamps */
+.aipower-timestamp {
+    font-size: 0.9em;
+    color: #666;
+}
+
+@keyframes aipower-scanning {
+    0% {
+        top: -50%;
+    }
+
+    50% {
+        top: 100%;
+    }
+
+    100% {
+        top: 100%;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .aipower-grouped-fields-bot div {
+        flex-basis: 48%;
+        /* Reduce the width of each element to fit two per row */
+        min-width: 100px;
+        /* Adjust min-width for better responsiveness */
+    }
+
+    .aipower-new-switch-container {
+        flex-direction: column;
+        /* Stack elements vertically */
+    }
+
+    .aipower-chat-preview-container,
+    .aipower-chat-log-container,
+    .aipower-pdfs-container {
+        flex-direction: column;
+        /* Stack sections vertically */
+    }
+
+    .aipower-chat-section,
+    .aipower-log-section,
+    .aipower-pdfs-section,
+    .aipower-preview-section,
+    .aipower-pdf-preview-section,
+    .aipower-log-preview-section {
+        flex: 0 0 100%;
+        /* Full width for each section */
+        margin-top: 0;
+        /* Remove negative margin */
+    }
+
+    .aipower-preview-section,
+    .aipower-pdf-preview-section,
+    .aipower-log-preview-section {
+        margin-top: 10px;
+        /* Add spacing between table and preview */
+    }
+
+    /* Reduce padding and font size for table cells */
+    .aipower-chatbot-table th,
+    .aipower-chatbot-table td {
+        padding: 4px 6px;
+        /* Reduce padding */
+        font-size: 12px;
+        /* Reduce font size */
+    }
+
+    /* Reduce icon sizes */
+    .aipower-chatbot-table .dashicons {
+        font-size: 14px;
+        /* Smaller icon size */
+    }
+}
+
+/* Responsive Adjustments for Medium Screens */
+@media (max-width: 992px) {
+    .aipower-accordion-panel:first-of-type .aipower-form-group {
+        flex: 1 1 calc(50% - 15px);
+        /* Up to 2 per row */
+    }
+}
+
+/* Responsive Adjustments for Small Screens */
+@media (max-width: 600px) {
+
+    /* Ensure Actions column remains visible */
+    .aipower-chatbot-table th:last-child,
+    .aipower-chatbot-table td:last-child {
+        width: 150px;
+        /* Fixed width */
+    }
+
+    /* Further reduce padding and font size */
+    .aipower-chatbot-table th,
+    .aipower-chatbot-table td {
+        padding: 3px 5px;
+        font-size: 11px;
+    }
+
+    /* Further reduce icon sizes */
+    .aipower-chatbot-table .dashicons {
+        font-size: 12px;
+    }
+
+    .aipower-new-switch-container .aipower-form-group {
+        flex: 1 1 100%;
+    }
+}
+
+/* Responsive Adjustments for Large Screens */
+@media (max-width: 1200px) and (min-width: 993px) {
+
+    /* Adjust the Actions column width */
+    .aipower-chatbot-table colgroup col:last-child {
+        width: 150px;
+        /* Fixed Actions column width */
+    }
+
+    /* Flexbox Layout for Actions Cells */
+    .aipower-chatbot-table td:last-child {
+        display: flex;
+        justify-content: center;
+        /* Center the icons */
+        align-items: center;
+        gap: 10px;
+        /* Space between icons */
+        flex-wrap: nowrap;
+        /* Prevent wrapping */
+        white-space: nowrap;
+        /* Keep actions in a single line */
+    }
+
+    /* Optimize Icon Sizes */
+    .aipower-chatbot-table .dashicons {
+        font-size: 16px;
+        /* Adjust icon size */
+        padding: 2px;
+        /* Slight padding */
+        min-width: 16px;
+        /* Prevent shrinking below usable size */
+        min-height: 16px;
+        /* Prevent shrinking below usable size */
+    }
+
+    /* Hover Effect for Better Visibility */
+    .aipower-chatbot-table .dashicons:hover {
+        color: #005bb5;
+        /* Darker color on hover for better visibility */
+    }
+}
+
+/* Further target even smaller screens */
+@media (max-width: 480px) {
+    .aipower-grouped-fields-bot div {
+        flex-basis: 100%;
+        /* Full width for each element on very small screens */
+    }
+
+    .aipower-chatbot-table td:last-child {
+        flex-direction: column;
+        /* Stack icons vertically */
+        align-items: flex-start;
+        /* Align icons to the start */
+    }
+
+    .aipower-chatbot-table .dashicons {
+        font-size: 14px;
+        /* Further reduce icon size */
+    }
+}
