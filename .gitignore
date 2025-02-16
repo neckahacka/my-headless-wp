@@ -1,0 +1,55 @@
+# ------------------------------------------------------------------
+# 1) ENV & SYSTEM FILES
+# ------------------------------------------------------------------
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+.DS_Store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ------------------------------------------------------------------
+# 2) NODE & REACT BUILD
+# ------------------------------------------------------------------
+/node_modules
+/.pnp
+.pnp.js
+/coverage
+/build
+
+# ------------------------------------------------------------------
+# 3) WORDPRESS EXCLUSIONS
+# (Adjust as you see fit)
+# ------------------------------------------------------------------
+
+# Entire uploads folder (images, etc. can get huge):
+/wordpress/wp-content/uploads
+
+# Log files or debug files
+/wordpress/wp-content/debug.log
+
+# Temporary upgrade folder
+/wordpress/wp-content/upgrade-temp-backup
+
+# Devp_notes folder (if it's truly personal scratch files):
+/wordpress/wp-content/Devp_notes
+
+# If you want to exclude ALL third-party themes/plugins:
+# /wordpress/wp-content/plugins
+# /wordpress/wp-content/themes
+
+# BUT if you have a CUSTOM theme or plugin you actively develop, you might:
+#  1. Re-include that folder specifically by using "!" lines
+#  2. Or just remove the lines above to keep it in version control
+#
+# Example pattern to exclude all themes EXCEPT "my-custom-theme":
+# /wordpress/wp-content/themes/*
+# !/wordpress/wp-content/themes/my-custom-theme
+#
+# Same logic for plugins if needed:
+# /wordpress/wp-content/plugins/*
+# !/wordpress/wp-content/plugins/my-custom-plugin
