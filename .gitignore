@@ -59,3 +59,12 @@ yarn-error.log*
 # ------------------------------------------------------------------
 /frontend/node_modules
 /frontend/.env
+
+# Ignore environment variables
+.env
+
+# Ignore dev notes and sensitive files
+devp_notes/
+
+# Ignore node_modules (in case you forgot to add this earlier)
+node_modules/
