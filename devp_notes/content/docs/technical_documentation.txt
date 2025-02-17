@@ -1,0 +1,245 @@
+# HashCats Technical Documentation
+
+## Core Infrastructure Setup
+
+### WordPress Configuration
+
+#### Theme Management
+1. **Backup Procedure**
+   ```bash
+   # Using Backuply
+   - Navigate to Tools > Backuply
+   - Select Full Backup
+   - Store backup file securely
+   ```
+
+2. **Theme Optimization**
+   - Current Theme: Formula
+   - Required Customizations:
+     ```php
+     // Add to functions.php
+     add_theme_support('editor-styles');
+     add_theme_support('responsive-embeds');
+     add_theme_support('align-wide');
+     ```
+
+3. **Plugin Infrastructure**
+   ```plaintext
+   Required Plugins:
+   ├── AI Power
+   ├── JWT Authentication
+   ├── WP REST API
+   └── WP Rocket (Performance)
+   ```
+
+### React Integration
+
+#### Component Structure
+```plaintext
+frontend/
+├── src/
+│   ├── components/
+│   │   ├── studio/
+│   │   │   ├── ArtGenerator/
+│   │   │   ├── StyleTransfer/
+│   │   │   └── Effects/
+│   │   └── common/
+│   ├── services/
+│   │   ├── aiService.js
+│   │   └── blockchainService.js
+│   └── pages/
+```
+
+## AI Tool Implementation
+
+### Custom Cat Art Generator
+
+#### Backend API Endpoints
+```php
+// Register REST API endpoints
+add_action('rest_api_init', function () {
+    register_rest_route('hashcats/v1', '/generate', array(
+        'methods' => 'POST',
+        'callback' => 'generate_cat_art',
+        'permission_callback' => function() {
+            return current_user_can('edit_posts');
+        }
+    ));
+});
+```
+
+#### Frontend Integration
+```javascript
+// src/services/aiService.js
+export const generateCatArt = async (prompt) => {
+    const response = await fetch('/wp-json/hashcats/v1/generate', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ prompt })
+    });
+    return response.json();
+};
+```
+
+### Style Transfer Implementation
+```javascript
+// src/components/studio/StyleTransfer/index.jsx
+const StyleTransfer = () => {
+    const [style, setStyle] = useState(null);
+    const [image, setImage] = useState(null);
+    
+    // Implementation details...
+};
+```
+
+## Blockchain Integration (Future)
+
+### Smart Contract Structure
+```solidity
+// contracts/HashCatNFT.sol
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+
+contract HashCatNFT is ERC721 {
+    constructor() ERC721("HashCat", "HCAT") {}
+    
+    // Minting functionality
+    function mint(address to, uint256 tokenId) public {
+        _safeMint(to, tokenId);
+    }
+}
+```
+
+### Frontend Blockchain Integration
+```javascript
+// src/services/blockchainService.js
+import { ethers } from 'ethers';
+
+export const mintNFT = async (artworkMetadata) => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    // Contract interaction logic...
+};
+```
+
+## Performance Optimization
+
+### WordPress Optimization
+1. **Caching Configuration**
+   ```php
+   // Add to wp-config.php
+   define('WP_CACHE', true);
+   define('DISABLE_WP_CRON', true);
+   ```
+
+2. **Image Optimization**
+   - Enable WebP conversion
+   - Implement lazy loading
+   - Use responsive images
+
+### React Optimization
+```javascript
+// Lazy loading components
+const ArtGenerator = React.lazy(() => import('./components/studio/ArtGenerator'));
+```
+
+## Security Measures
+
+### WordPress Security
+```php
+// Add to .htaccess
+# Protect wp-config.php
+<files wp-config.php>
+order allow,deny
+deny from all
+</files>
+
+# Disable directory browsing
+Options -Indexes
+```
+
+### API Security
+```php
+// Add to functions.php
+add_filter('rest_authentication_errors', function($result) {
+    if (!empty($result)) {
+        return $result;
+    }
+    if (!is_user_logged_in()) {
+        return new WP_Error(
+            'rest_not_logged_in',
+            'You are not currently logged in.',
+            array('status' => 401)
+        );
+    }
+    return $result;
+});
+```
+
+## Development Workflow
+
+### Local Development
+1. Start XAMPP services
+2. Run WordPress locally
+3. Start React development server:
+   ```bash
+   npm start
+   ```
+
+### Deployment Process
+1. Build React application:
+   ```bash
+   npm run build
+   ```
+2. Deploy WordPress updates
+3. Update database if needed
+
+## Testing Procedures
+
+### WordPress Testing
+- Use PHPUnit for backend tests
+- Verify REST API endpoints
+- Test plugin compatibility
+
+### React Testing
+```bash
+# Run tests
+npm test
+
+# Run with coverage
+npm test -- --coverage
+```
+
+## Maintenance Tasks
+
+### Regular Updates
+1. WordPress core updates
+2. Plugin updates
+3. Theme updates
+4. Security patches
+
+### Backup Schedule
+- Daily database backups
+- Weekly full site backups
+- Monthly archive storage
+
+## Troubleshooting Guide
+
+### Common Issues
+1. REST API connectivity
+2. Plugin conflicts
+3. Performance bottlenecks
+
+### Debug Procedures
+```php
+// Enable WordPress debugging
+define('WP_DEBUG', true);
+define('WP_DEBUG_LOG', true);
+```
+
+## Documentation Updates
+Last Updated: January 23, 2025
+Version: 1.0.1

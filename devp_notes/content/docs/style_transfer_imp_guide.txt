@@ -1,0 +1,160 @@
+# Style Transfer Implementation Guide
+
+## Overview
+The Style Transfer feature allows users to apply artistic styles to existing cat images.
+
+## Component Structure
+```plaintext
+src/components/studio/StyleTransfer/
+├── index.jsx              # Main component
+├── ImageUploader.jsx      # Image upload handling
+├── StylePicker.jsx        # Style selection
+├── Preview.jsx           # Real-time preview
+└── Controls.jsx          # Transfer controls
+```
+
+## Implementation Steps
+
+### 1. Main Style Transfer Component
+```jsx
+// src/components/studio/StyleTransfer/index.jsx
+import React, { useState } from 'react';
+import ImageUploader from './ImageUploader';
+import StylePicker from './StylePicker';
+import Preview from './Preview';
+import Controls from './Controls';
+
+const StyleTransfer = () => {
+  const [sourceImage, setSourceImage] = useState(null);
+  const [selectedStyle, setSelectedStyle] = useState(null);
+  const [result, setResult] = useState(null);
+
+  const handleTransfer = async () => {
+    if (!sourceImage || !selectedStyle) return;
+    
+    try {
+      const result = await applyStyle(sourceImage, selectedStyle);
+      setResult(result);
+    } catch (error) {
+      console.error('Style transfer failed:', error);
+    }
+  };
+
+  return (
+    <div className="bg-gray-900 p-6 rounded-lg">
+      <ImageUploader onImageSelect={setSourceImage} />
+      <StylePicker onStyleSelect={setSelectedStyle} />
+      <Preview original={sourceImage} result={result} />
+      <Controls onTransfer={handleTransfer} />
+    </div>
+  );
+};
+
+export default StyleTransfer;
+```
+
+### 2. Image Upload Handler
+```jsx
+// src/components/studio/StyleTransfer/ImageUploader.jsx
+const ImageUploader = ({ onImageSelect }) => {
+  const handleUpload = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    // Image processing logic
+    const processedImage = await processImage(file);
+    onImageSelect(processedImage);
+  };
+
+  return (
+    <div className="border-2 border-dashed border-gray-600 p-4 rounded-lg">
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleUpload}
+        className="hidden"
+        id="image-upload"
+      />
+      <label
+        htmlFor="image-upload"
+        className="cursor-pointer text-white"
+      >
+        Upload Image
+      </label>
+    </div>
+  );
+};
+```
+
+### 3. Style Processing Service
+```javascript
+// src/services/styleService.js
+export const applyStyle = async (image, style) => {
+  const formData = new FormData();
+  formData.append('image', image);
+  formData.append('style', style.id);
+
+  const response = await fetch('/wp-json/hashcats/v1/style-transfer', {
+    method: 'POST',
+    body: formData
+  });
+
+  return response.json();
+};
+```
+
+## Available Styles
+```javascript
+// src/constants/transferStyles.js
+export const TRANSFER_STYLES = [
+  {
+    id: 'watercolor',
+    name: 'Watercolor',
+    preview: '/assets/styles/watercolor.jpg'
+  },
+  {
+    id: 'oil-painting',
+    name: 'Oil Painting',
+    preview: '/assets/styles/oil-painting.jpg'
+  }
+  // Add more styles
+];
+```
+
+## Image Processing
+```javascript
+const processImage = async (file) => {
+  // Validate file type
+  if (!file.type.startsWith('image/')) {
+    throw new Error('Invalid file type');
+  }
+
+  // Resize if needed
+  const resized = await resizeImage(file, {
+    maxWidth: 1024,
+    maxHeight: 1024
+  });
+
+  return resized;
+};
+```
+
+## Error Handling
+```javascript
+const handleStyleTransfer = async () => {
+  try {
+    setLoading(true);
+    const result = await applyStyle(sourceImage, selectedStyle);
+    setResult(result);
+  } catch (error) {
+    setError('Style transfer failed. Please try again.');
+  } finally {
+    setLoading(false);
+  }
+};
+```
+
+## Performance Optimization
+1. Image compression before upload
+2. Progressive loading
+3. Result caching

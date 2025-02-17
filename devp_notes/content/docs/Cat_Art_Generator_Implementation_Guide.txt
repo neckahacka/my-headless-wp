@@ -1,0 +1,122 @@
+# Cat Art Generator Implementation Guide
+
+## Overview
+The Cat Art Generator is HashCats' core feature, allowing users to create unique AI-generated cat artwork.
+
+## Component Structure
+```plaintext
+src/components/studio/ArtGenerator/
+├── index.jsx               # Main component
+├── PromptBuilder.jsx       # Prompt creation interface
+├── StyleSelector.jsx       # Art style selection
+├── Canvas.jsx             # Preview display
+└── Controls.jsx           # Generation controls
+```
+
+## Implementation Steps
+
+### 1. Main Generator Component
+```jsx
+// src/components/studio/ArtGenerator/index.jsx
+import React, { useState } from 'react';
+import PromptBuilder from './PromptBuilder';
+import StyleSelector from './StyleSelector';
+import Canvas from './Canvas';
+import Controls from './Controls';
+
+const ArtGenerator = () => {
+  const [prompt, setPrompt] = useState('');
+  const [style, setStyle] = useState('');
+  const [result, setResult] = useState(null);
+
+  const handleGenerate = async () => {
+    // AI generation logic
+  };
+
+  return (
+    <div className="bg-gray-900 p-6 rounded-lg">
+      <PromptBuilder onPromptChange={setPrompt} />
+      <StyleSelector onStyleSelect={setStyle} />
+      <Canvas result={result} />
+      <Controls onGenerate={handleGenerate} />
+    </div>
+  );
+};
+
+export default ArtGenerator;
+```
+
+### 2. AI Integration Service
+```javascript
+// src/services/aiService.js
+export const generateCatArt = async (prompt, style) => {
+  const response = await fetch('/wp-json/hashcats/v1/generate', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ prompt, style })
+  });
+  
+  return response.json();
+};
+```
+
+### 3. WordPress API Endpoint
+```php
+// functions.php or custom plugin
+add_action('rest_api_init', function () {
+  register_rest_route('hashcats/v1', '/generate', array(
+    'methods' => 'POST',
+    'callback' => 'generate_cat_art',
+    'permission_callback' => function() {
+      return true; // Modify based on your auth requirements
+    }
+  ));
+});
+
+function generate_cat_art($request) {
+  $params = $request->get_params();
+  // AI generation logic
+  return rest_ensure_response($result);
+}
+```
+
+## Styles Integration
+```javascript
+// src/constants/artStyles.js
+export const ART_STYLES = [
+  {
+    id: 'cartoon',
+    name: 'Cartoon',
+    description: 'Playful cartoon style'
+  },
+  {
+    id: 'realistic',
+    name: 'Realistic',
+    description: 'Photorealistic rendering'
+  },
+  // Add more styles
+];
+```
+
+## Error Handling
+```javascript
+try {
+  const result = await generateCatArt(prompt, style);
+  setResult(result);
+} catch (error) {
+  console.error('Generation failed:', error);
+  // Show user-friendly error message
+}
+```
+
+## Testing Procedures
+1. Unit tests for components
+2. Integration tests for AI service
+3. End-to-end generation tests
+
+## Performance Considerations
+1. Image optimization
+2. Loading states
+3. Caching strategies

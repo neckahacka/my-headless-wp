@@ -1,0 +1,243 @@
+# HashCats.com Development Documentation
+
+## Project Overview
+HashCats.com is a headless WordPress + React application that integrates AI tools (DALL·E, ChatGPT, FLUX) with planned blockchain functionality for NFT features.
+
+### Project Structure
+```
+my-headless-wp/
+├── frontend/                 # React application
+│   ├── src/
+│   │   ├── components/      # Reusable React components
+│   │   ├── pages/          # Page components
+│   │   │   └── studio/     # Studio-related pages
+│   │   ├── contexts/       # React contexts
+│   │   ├── services/       # API and utility services
+│   │   └── App.js         # Main React component
+│   └── package.json       # Frontend dependencies
+└── wordpress/             # WordPress installation
+    └── wp-content/
+        ├── plugins/       # Custom and installed plugins
+        └── themes/        # WordPress theme
+
+```
+
+## Frontend Setup
+
+### 1. Dependencies
+```json
+{
+  "dependencies": {
+    "@headlessui/react": "^2.2.0",
+    "axios": "^1.7.9",
+    "lucide-react": "^0.473.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/typography": "^0.5.16",
+    "tailwindcss": "^3.4.17"
+  }
+}
+```
+
+### 2. Key Components
+
+#### App.js (src/App.js)
+```jsx
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { StudioProvider } from './contexts/StudioContext';
+import Navbar from "./components/Navbar";
+import HomePage from "./pages/HomePage";
+import PostPage from "./pages/PostPage";
+import CatStudio from "./pages/studio/CatStudio";
+import AITools from "./pages/studio/AITools";
+import CatPersonalityGenerator from "./components/studio/features/CatPersonalityGenerator";
+import StyleFusion from "./components/studio/features/StyleFusion";
+import Meowseum from "./pages/studio/Meowseum";
+
+const App = () => {
+  return (
+    <Router>
+      <StudioProvider>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/post/:id" element={<PostPage />} />
+          <Route path="/studio/create" element={<CatStudio />} />
+          <Route path="/studio/transform" element={<AITools />} />
+          <Route path="/studio/personality" element={<CatPersonalityGenerator />} />
+          <Route path="/studio/style-fusion" element={<StyleFusion />} />
+          <Route path="/meowseum" element={<Meowseum />} />
+          <Route path="*" element={<div>404 Not Found</div>} />
+        </Routes>
+      </StudioProvider>
+    </Router>
+  );
+};
+
+export default App;
+```
+
+#### Meowseum Component (src/pages/studio/Meowseum.jsx)
+```jsx
+import React, { useState, useEffect } from 'react';
+import { Heart, Share2, Download, AlertCircle } from 'lucide-react';
+
+const Meowseum = () => {
+  const [artworks, setArtworks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetchArtworks();
+  }, []);
+
+  const fetchArtworks = async () => {
+    try {
+      const response = await fetch('http://localhost/my-headless-wp/wordpress/wp-json/wp/v2/posts?_embed');
+      if (!response.ok) throw new Error('Failed to fetch artworks');
+      
+      const data = await response.json();
+      const formattedArtworks = data.map(artwork => ({
+        id: artwork.id,
+        title: artwork.title.rendered,
+        description: artwork.content.rendered,
+        category: artwork._embedded?.['wp:term']?.[0]?.[0]?.name || 'Uncategorized',
+        tags: artwork._embedded?.['wp:term']?.[1]?.map(tag => tag.name) || [],
+        image: artwork._embedded?.['wp:featuredmedia']?.[0]?.source_url || '/api/placeholder/400/400'
+      }));
+
+      setArtworks(formattedArtworks);
+    } catch (error) {
+      setError(error.message);
+      console.error('Error:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ... render code
+};
+
+export default Meowseum;
+```
+
+## WordPress Setup
+
+### 1. Custom Post Types
+Add to your theme's functions.php or a custom plugin:
+
+```php
+function register_artwork_post_type() {
+    register_post_type('artworks', [
+        'labels' => [
+            'name' => 'Artworks',
+            'singular_name' => 'Artwork'
+        ],
+        'public' => true,
+        'supports' => [
+            'title',
+            'editor',
+            'thumbnail',
+            'excerpt',
+            'custom-fields'
+        ],
+        'show_in_rest' => true,
+        'menu_icon' => 'dashicons-art'
+    ]);
+}
+add_action('init', 'register_artwork_post_type');
+```
+
+### 2. REST API Configuration
+```php
+// Enable CORS
+add_action('init', function() {
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type");
+});
+
+// Add custom fields to REST API
+add_action('rest_api_init', function() {
+    register_rest_field('artworks', 'metadata', [
+        'get_callback' => function($object) {
+            return get_post_meta($object['id']);
+        }
+    ]);
+});
+```
+
+## Development Workflow
+
+### 1. Start Development Servers
+```bash
+# Start WordPress (XAMPP/MAMP)
+# Navigate to frontend directory
+cd frontend
+npm start
+```
+
+### 2. Build for Production
+```bash
+# Frontend build
+cd frontend
+npm run build
+
+# Copy build files to WordPress theme (optional)
+cp -r build/* ../wordpress/wp-content/themes/your-theme/react-app/
+```
+
+## Common Tasks
+
+### Adding New Components
+1. Create component in appropriate directory
+2. Import and add route in App.js if needed
+3. Update navigation in Navbar component
+
+### WordPress Integration
+1. Enable custom post type
+2. Add to REST API if needed
+3. Update frontend fetch calls
+4. Test with Postman
+
+### Styling
+- Use Tailwind CSS utilities
+- Follow existing color scheme
+- Maintain responsive design
+
+## API Endpoints
+
+### WordPress REST API
+- Posts: `/wp-json/wp/v2/posts`
+- Artworks: `/wp-json/wp/v2/artworks`
+- Media: `/wp-json/wp/v2/media`
+
+### Custom Endpoints
+Document any custom endpoints here.
+
+## Troubleshooting
+
+### Common Issues
+1. CORS errors
+   - Check WordPress CORS headers
+   - Verify API URL in frontend
+2. Failed to fetch
+   - Confirm WordPress server is running
+   - Check endpoint URLs
+3. Image loading issues
+   - Verify media permissions
+   - Check featured image setup
+
+## Next Steps
+
+### Planned Features
+1. Custom post type for artworks
+2. Authentication system
+3. NFT integration
+4. Enhanced AI tools

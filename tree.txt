@@ -1,0 +1,23 @@
+D:\xampp\htdocs\my-headless-wp\frontend\
+└── src\
+    ├── components\
+    │   ├── studio\              # All HashCats Studio components
+    │   │   ├── creative\        # Cat-specific creative tools
+    │   │   │   ├── CatCreator.jsx
+    │   │   │   ├── CatPersonality.jsx
+    │   │   │   └── CatStyleTransfer.jsx
+    │   │   ├── utils\          # General AI tools
+    │   │   │   ├── ImageEnhancer.jsx
+    │   │   │   ├── BackgroundRemover.jsx
+    │   │   │   └── FaceSwapper.jsx
+    │   │   └── common\         # Shared components
+    │   │       ├── StudioLayout.jsx
+    │   │       └── ToolSelector.jsx
+    │   └── common\             # General site components
+    ├── services\               # API integrations
+    │   ├── aiPowerService.js   # AI Power plugin integration
+    │   └── wpService.js        # WordPress REST API calls
+    └── pages\
+        └── studio\
+            ├── CatStudio.jsx   # Cat-specific tools page
+            └── AITools.jsx     # General AI tools page
